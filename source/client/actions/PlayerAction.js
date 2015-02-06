@@ -20,8 +20,8 @@ var handlePlayerUpdated = function (player) {
 
 var PlayerAction = {
   listen: function () {
-    GameClient.socket.on(PlayerActionType.INITIALIZED, handlePlayerInitialized);
-    GameClient.socket.on(PlayerActionType.UPDATED, handlePlayerUpdated);
+    GameClient.on(PlayerActionType.INITIALIZED, handlePlayerInitialized);
+    GameClient.on(PlayerActionType.UPDATED, handlePlayerUpdated);
   }
 };
 

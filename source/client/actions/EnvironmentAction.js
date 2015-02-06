@@ -27,9 +27,9 @@ var handlePlayerDisconnected = function (player) {
 
 var EnvironmentAction = {
   listen: function () {
-    GameClient.socket.on(EnvironmentActionType.INITIALIZED, handleEnvironmentInitialized);
-    GameClient.socket.on(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, handlePlayerConnected);
-    GameClient.socket.on(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, handlePlayerDisconnected);
+    GameClient.on(EnvironmentActionType.INITIALIZED, handleEnvironmentInitialized);
+    GameClient.on(EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED, handlePlayerConnected);
+    GameClient.on(EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED, handlePlayerDisconnected);
   }
 };
 

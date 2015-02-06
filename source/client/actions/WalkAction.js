@@ -20,11 +20,11 @@ var handleWalkError = function (ex) {
 
 var WalkAction = {
   listen: function () {
-    GameClient.socket.on(WalkActionType.WALK_SUCCESS, handleWalkSuccess);
-    GameClient.socket.on(WalkActionType.WALK_ERROR, handleWalkError);
+    GameClient.on(WalkActionType.WALK_SUCCESS, handleWalkSuccess);
+    GameClient.on(WalkActionType.WALK_ERROR, handleWalkError);
   },
   walk: function (position) {
-    GameClient.socket.emit(WalkActionType.WALK, position);
+    GameClient.emit(WalkActionType.WALK, position);
     AppDispatcher.handleServerAction({
       actionType: WalkActionType.WALK
     });

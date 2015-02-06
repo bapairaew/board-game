@@ -20,11 +20,11 @@ var handleRollError = function (ex) {
 
 var RollAction = {
   listen: function () {
-    GameClient.socket.on(RollActionType.ROLL_SUCCESS, handleRollSuccess);
-    GameClient.socket.on(RollActionType.ROLL_ERROR, handleRollError);
+    GameClient.on(RollActionType.ROLL_SUCCESS, handleRollSuccess);
+    GameClient.on(RollActionType.ROLL_ERROR, handleRollError);
   },
   roll: function () {
-    GameClient.socket.emit(RollActionType.ROLL);
+    GameClient.emit(RollActionType.ROLL);
     AppDispatcher.handleServerAction({
       actionType: RollActionType.ROLL
     });
