@@ -10,7 +10,9 @@ var Link = ReactRouter.Link;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var App = React.createClass({
+  mixins: [ReactRouter.State],
   render: function () {
+    var name = this.getRoutes().reverse()[0].name;
     return (
       <div className="container-fluid">
         <ul>
@@ -18,7 +20,7 @@ var App = React.createClass({
           <li><Link to="/login">Login</Link></li>
         </ul>
         <ReactCSSTransitionGroup component="div" transitionName="example">
-          <RouteHandler {...this.props} />
+          <RouteHandler {...this.props} key={name} />
         </ReactCSSTransitionGroup>
       </div>
     );
