@@ -5,9 +5,10 @@
 
 var React = require('react');
 var ReactRouter = require('react-router');
+var Routes = require('../routes.jsx');
 
-function ServerAppRenderer(Routes) {
-  this.render = function (req, res, next) {
+var Server = {
+  render: function (req, res, next) {
     ReactRouter.run(Routes, req.url, function (Handler) {
       var content = React.renderToString(<Handler />);
       res.send(
@@ -18,12 +19,14 @@ function ServerAppRenderer(Routes) {
           '<title>Game</title>\n' +
         '</head>\n' +
         '<body>\n' +
-          content +
+          '<div id="app">\n' +
+            content +
+          '</div>\n' +
           '<script src="/build/app.js"></script>\n' +
         '</body>\n' +
       '</html>');
     });
-  };
-}
+  }
+};
 
-module.exports = ServerAppRenderer;
+module.exports = Server;

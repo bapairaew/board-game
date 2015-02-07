@@ -4,14 +4,16 @@
 'use strict';
 
 var React = require('react');
+var Navigation = require('react-router').Navigation;
 
 var Login = React.createClass({
+  mixins: [Navigation],
   login: function () {
-    alert('test');
+    this.transitionTo('/');
   },
   render: function () {
     return (
-      <div>
+      <div className="login">
         <button onClick={ this.login }>Login</button>
       </div>
     );
