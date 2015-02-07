@@ -7,6 +7,10 @@ var React = require('react');
 
 var GameMixin = require('../mixins/GameMixin');
 
+var GameClient = require('../utilities/GameClient');
+
+var EnvironmentAction = require('../actions/EnvironmentAction');
+var PlayerAction = require('../actions/PlayerAction');
 var RollAction = require('../actions/RollAction');
 var WalkAction = require('../actions/WalkAction');
 
@@ -50,6 +54,14 @@ var toString = function (obj) {
 
 var Demo = React.createClass({
   mixins: [GameMixin],
+
+  componentDidMount: function () {
+    GameClient.init(window.location.origin);
+    EnvironmentAction.listen();
+    PlayerAction.listen();
+    RollAction.listen();
+    WalkAction.listen();
+  },
 
   render: function () {
     var walkButton = {
