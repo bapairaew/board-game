@@ -5,23 +5,28 @@ var express = require('express');
 var browserify = require('connect-browserify');
 var http = require('http');
 
-var AppRenderer = require('./server/utilities/AppRenderer');
-var GameServer = require('./server/utilities/GameServer');
-var App = require('./client/components/App.jsx');
+require('node-jsx').install({ extension: '.jsx' });
 
-var renderer = new AppRenderer(App);
+var ServerAppRenderer = require('./server/utilities/ServerAppRenderer.jsx');
+var GameServer = require('./server/utilities/GameServer');
+var Routes = require('./client/components/Routes.jsx');
+
+var renderer = new ServerAppRenderer(Routes);
 var __root = path.normalize(path.join(__dirname, '..'));
 var app = express();
 
 if (process.env.NODE_ENV !== 'production') {
   app.get('/build/app.js',
-    browserify('./source/client/components/App.jsx', {
+    browserify('./source/client/utilities/ClientAppRenderer.jsx', {
       debug: true,
       watch: true
     }));
 }
 
 app.use('/build', express.static(path.join(__root, 'build')))
+  .get('/favicon.ico', function (req, res, next) {
+    res.send();
+  })
   .use(renderer.render);
 
 var server = http.Server(app);

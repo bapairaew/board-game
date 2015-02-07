@@ -6,10 +6,13 @@
 var React = require('react');
 
 var Login = React.createClass({
+  login: function () {
+    alert('test');
+  },
   render: function () {
     return (
       <div>
-        Login
+        <button onClick={ this.login }>Login</button>
       </div>
     );
   }
