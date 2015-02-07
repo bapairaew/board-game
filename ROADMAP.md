@@ -1,0 +1,12 @@
+## Roadmap
+- Players walk and path validation
+- Items, Places and Effects execution logic
+- Battle logic
+- Database integration
+- User Interface
+- Login logic
+- Income scheduler
+- JIRA integration
+- *(optional)* Replace [react-router-component](https://github.com/STRML/react-router-component) with [react-router](https://github.com/rackt/react-router) ([example](https://github.com/rackt/react-router-mega-demo))
+- *(optional)* Replace [browserify](https://github.com/substack/node-browserify) with [webpack](https://github.com/webpack/webpack)
+- *(optional)* Use [react-document-title](https://github.com/gaearon/react-document-title)
