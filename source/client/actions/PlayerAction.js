@@ -22,6 +22,17 @@ var PlayerAction = {
   listen: function () {
     GameClient.on(PlayerActionType.INITIALIZED, handlePlayerInitialized);
     GameClient.on(PlayerActionType.UPDATED, handlePlayerUpdated);
+  },
+  login: function () {
+    AppDispatcher.handleViewAction({
+      actionType: PlayerActionType.LOGIN
+    });
+
+    setTimeout(function () {
+      AppDispatcher.handleServerAction({
+        actionType: PlayerActionType.LOGIN_SUCCESS
+      });
+    }, 1000);
   }
 };
 

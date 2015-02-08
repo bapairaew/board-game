@@ -1,31 +1,34 @@
 @import "../../../node_modules/bootstrap/less/bootstrap";
 
+@import "./mixins/buttons";
+@import "./buttons";
+
 @import "./demo";
 @import "./player-list";
 
-.login {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: red;
-}
+@import "./login";
+@import "./page-transition";
 
-.example-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
+@font-family-sans-serif:  "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-.example-enter.example-enter-active {
-  opacity: 1;
-}
+@border-radius-base:        3px;
+@border-radius-large:       3px;
+@border-radius-small:       0;
 
-.example-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
-}
+@gray-01:    #ffffff;
+@gray-02:    #e2e2e2;
+@gray-03:    #c2c2c2;
+@gray-04:    #8c8c8c;
+@gray-05:    #666570;
+@gray-06:    #3c3c42;
+@gray-07:    #2f3437;
+@gray-08:    #24292c;
+@gray-09:    #1e1e21;
+@gray-10:    #1a1a1c;
+@gray-11:    #151516;
+@gray-12:    #0a0a0a;
+@gray-13:    #000000;
 
-.example-leave.example-leave-active {
-  opacity: 0.01;
-}
+@text-color:            @gray-03;
+
+@brand-primary:         #f93;

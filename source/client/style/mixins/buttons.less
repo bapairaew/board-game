@@ -1,0 +1,53 @@
+// Override bootrap mixins/buttons
+.button-variant(@color; @background; @border) {
+  // CHANGED: make it black
+  @color: @gray-13;
+
+  color: @color;
+
+  background-color: @background;
+  border-color: @border;
+
+  // ADDED
+  .box-shadow(0 3px darken(@background, 20%));
+
+  // CHANGED: lighten hover/focus bg
+  &:hover,
+  &:focus,
+  &.focus {
+    color: @color;
+    background-color: lighten(@background, 10%);
+        border-color: lighten(@border, 12%);
+  }
+
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    color: @color;
+    background-color: darken(@background, 10%);
+        border-color: darken(@border, 12%);
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: @background;
+          border-color: @border;
+    }
+  }
+
+  .badge {
+    color: @background;
+    background-color: @color;
+  }
+}

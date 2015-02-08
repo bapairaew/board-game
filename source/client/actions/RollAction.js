@@ -25,7 +25,7 @@ var RollAction = {
   },
   roll: function () {
     GameClient.emit(RollActionType.ROLL);
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleViewAction({
       actionType: RollActionType.ROLL
     });
   }

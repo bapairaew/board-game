@@ -1,0 +1,22 @@
+.page-enter {
+  position: absolute;
+
+  transition: transform 300ms ease-out;
+  transform: translate3d(0, 100%, 0);
+  z-index: 10000;
+
+  &.page-enter-active {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.page-leave {
+  position: absolute;
+
+  transition: transform 300ms ease-out;
+  transform: translate3d(0 ,0, 0);
+
+  &.page-leave-active {
+    transform: translate3d(0, -15%, 0);
+  }
+}

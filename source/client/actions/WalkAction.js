@@ -25,7 +25,7 @@ var WalkAction = {
   },
   walk: function (position) {
     GameClient.emit(WalkActionType.WALK, position);
-    AppDispatcher.handleServerAction({
+    AppDispatcher.handleViewAction({
       actionType: WalkActionType.WALK
     });
   }

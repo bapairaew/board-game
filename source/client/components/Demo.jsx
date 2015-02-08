@@ -75,7 +75,7 @@ var Demo = React.createClass({
     }.bind(this);
 
     return (
-      <div>
+      <div className="demo">
         <div className="panel panel-default">
           <div className="panel-body">
             <h4>{ this.state.player.name }</h4>
