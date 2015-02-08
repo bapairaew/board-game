@@ -12,8 +12,18 @@ var joinClasses = require('../../utilities/joinClasses');
 var PlayerAction = require('../actions/PlayerAction');
 var PlayerStore = require('../stores/PlayerStore');
 
+var Chance = require('chance');
+var chance = new Chance();
+
+var facts = require('../../assets/facts.json');
+
 var Login = React.createClass({
   mixins: [Navigation],
+
+  isLoggedIn: function () {
+    var player = this.getState().player;
+    return player.isLoggedIn;
+  },
 
   getState: function () {
     return {
@@ -26,6 +36,9 @@ var Login = React.createClass({
   },
 
   componentDidMount: function () {
+    if (this.isLoggedIn()) {
+      this.transitionTo('/');
+    }
     PlayerStore.addChangeListener(this.refreshState);
   },
 
@@ -34,9 +47,7 @@ var Login = React.createClass({
   },
 
   refreshState: function () {
-    var player = this.getState().player;
-    var logined = player.logined;
-    if (logined) {
+    if (this.isLoggedIn()) {
       this.transitionTo('/');
     } else {
       this.setState(this.getState());
@@ -52,26 +63,26 @@ var Login = React.createClass({
 
   render: function () {
     var player = this.getState().player;
-    var logingin = player.logingin;
+    var isLoggingIn = player.isLoggingIn;
 
     var loginInputClasses = classSet({
-      'hidden': logingin
+      'hidden': isLoggingIn
     });
 
     var loginContainerClasses = classSet({
       'login-container': true,
-      'collapsed': logingin
+      'collapsed': isLoggingIn
     });
 
     var loadingBarClasses = classSet({
       'loading-bar': true,
       'progress': true,
-      'started': logingin
+      'started': isLoggingIn
     });
 
     var loadingTextClasses = classSet({
       'loading-text': true,
-      'started': logingin
+      'started': isLoggingIn
     });
 
     var progressBarStyle = {
@@ -83,7 +94,7 @@ var Login = React.createClass({
         <div className={ loginContainerClasses }>
           <h1 className="login-header">Eikonia</h1>
           <div className={ loadingTextClasses }>
-            Singing in
+            { chance.pick(facts) }
           </div>
           <div className={ loadingBarClasses }>
             <div className="progress-bar progress-bar-striped active" style={ progressBarStyle }></div>

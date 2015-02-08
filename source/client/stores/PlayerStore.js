@@ -42,16 +42,16 @@ var PlayerStore = _.extend({}, EventEmitter.prototype, {
         PlayerStore.emitChange();
         break;
       case PlayerActionType.LOGIN:
-        player.logingin = true;
+        player.isLoggingIn = true;
         PlayerStore.emitChange();
         break;
       case PlayerActionType.LOGIN_SUCCESS:
-        player.logined = true;
-        player.logingin = false;
+        player.isLoggedIn = true;
+        player.isLoggingIn = false;
         PlayerStore.emitChange();
         break;
       case PlayerActionType.LOGIN_ERROR:
-        player.logingin = false;
+        player.isLoggingIn = false;
         PlayerStore.emitChange();
         break;
       case RollActionType.ROLL_SUCCESS:

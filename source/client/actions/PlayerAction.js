@@ -32,7 +32,7 @@ var PlayerAction = {
       AppDispatcher.handleServerAction({
         actionType: PlayerActionType.LOGIN_SUCCESS
       });
-    }, 1000);
+    }, 5000);
   }
 };
 

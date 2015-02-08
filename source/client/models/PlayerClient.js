@@ -10,8 +10,8 @@ function PlayerClient() {
 // Inheritance
 PlayerClient.prototype = Object.create(Player.prototype);
 
-PlayerClient.prototype.logined = false;
+PlayerClient.prototype.isLoggedIn = false;
 
-PlayerClient.prototype.logingin = false;
+PlayerClient.prototype.isLoggingIn = false;
 
 module.exports = PlayerClient;
