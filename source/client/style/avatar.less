@@ -1,0 +1,29 @@
+@avartar-size: 40px;
+
+.avatar {
+  background-size: @avartar-size @avartar-size;
+  background-color: @gray-04;
+  border-radius: 50%;
+  margin: -2px;
+  background-position: -2px;
+  border: 2px solid transparent;
+  display: inline-block;
+  height: @avartar-size;
+  width: @avartar-size;
+
+  &.btn {
+    &:not(:active):not(.active) {
+      .box-shadow(0 3px darken(@gray-04, 10%));
+    }
+
+    &:focus,
+    &:active:focus,
+    &.active:focus,
+    &.focus,
+    &:active.focus,
+    &.active.focus {
+      outline: 0;
+      border-color: @brand-primary;
+    }
+  }
+}

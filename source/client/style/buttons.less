@@ -8,4 +8,21 @@
       top: 3px;
     }
   }
+
+  &.btn-link {
+    &:focus,
+    &.focus {
+      outline: 0;
+      border: 1px solid @brand-primary;
+    }
+  }
+
+  &:focus,
+  &:active:focus,
+  &.active:focus,
+  &.focus,
+  &:active.focus,
+  &.active.focus {
+    outline: 5px auto @brand-primary;
+  }
 }
