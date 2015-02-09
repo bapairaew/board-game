@@ -22,6 +22,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use('/build', express.static(path.join(__root, 'build')))
+  .use('/assets', express.static(path.join(__dirname, 'assets')))
   .get('/favicon.ico', function (req, res, next) {
     res.send();
   })
