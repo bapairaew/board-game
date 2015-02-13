@@ -1,3 +1,8 @@
+.game {
+  width: 100%;
+  height: 100%;
+}
+
 .game-toolbar {
   width: 400px;
   position: absolute;
@@ -40,9 +45,45 @@
   height: 600px;
   width: 500px;
   background-color: lighten(@btn-default-bg, 10%);
-  .box-shadow(0 3px darken(@btn-default-bg, 20%));
   z-index: 9;
+  overflow-x: hidden;
+  transition: height 300ms ease-out;
+  .box-shadow(0 3px darken(@btn-default-bg, 20%));
   .animation(showpanel 300ms @elastic);
+
+  .game-panel-container {
+    width: 100%;
+    height: 100%;
+
+    @header-height: 35px;
+
+    .game-panel-header,
+    .game-panel-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+    }
+
+    .game-panel-header {
+      top: 0;
+      height: @header-height;
+      padding: 9px;
+    }
+
+    .game-panel-content {
+      top: @header-height;
+      bottom: 0;
+      background-color: @gray-07;
+    }
+  }
+}
+
+.game,
+.game-panel,
+.game-toolbar {
+  &:focus {
+    outline: 0;
+  }
 }
 
 @keyframes showpanel {

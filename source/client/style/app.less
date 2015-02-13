@@ -4,6 +4,7 @@
 @import "./variables";
 @import "./buttons";
 @import "./progress-bars";
+@import "./coins";
 
 @import "./hidden";
 @import "./sprite";
@@ -13,9 +14,24 @@
 @import "./player-list";
 
 @import "./page-transition";
+@import "./pane-content-transition";
 @import "./avatar";
 
 @import "./login";
 @import "./game";
+
+// TODO: move these
+html,
+body,
+#app,
+.container-fluid {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+:focus {
+  outline-color: @brand-primary;
+}
 
 @elastic: cubic-bezier(0.215, 0.61, 0.355, 1);
