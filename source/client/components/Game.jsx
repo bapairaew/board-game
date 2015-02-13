@@ -41,7 +41,8 @@ var Game = React.createClass({
     if (!_.isString(menu)) {
       this.showPanel = false;
     } else {
-      this.showPanel = true;
+      // Close if the click the same menu
+      this.showPanel = this.activeMenu !== menu || !this.showPanel;
       this.activeMenu = menu;
     }
     this.forceUpdate();
