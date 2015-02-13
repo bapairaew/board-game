@@ -1,0 +1,66 @@
+.game-object {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background: url(/assets/sprite.png);
+
+  .locate(@col; @row; @xoff: 0; @yoff: 0) {
+    background-position: (@col * -32px - @xoff) (@row * -32px - @yoff);
+  }
+
+  &.black-fruit {
+    .locate(0, 0);
+  }
+
+  &.red-fruit {
+    .locate(1, 0, 3px);
+  }
+
+  &.green-apple {
+    .locate(2, 0, 4px);
+  }
+
+  &.red-apple {
+    .locate(3, 0, 7px);
+  }
+
+  &.orange {
+    .locate(4, 0, 9px);
+  }
+
+  &.green-grape {
+    .locate(5, 0, 12px);
+  }
+
+  &.purple-grape {
+    .locate(6, 0, 13px);
+  }
+
+  &.watermelon {
+    .locate(7, 0, 14px);
+  }
+
+  &.strawberry {
+    .locate(8, 0, 16px);
+  }
+
+  &.green-fruit {
+    .locate(9, 0, 19px);
+  }
+
+  &.lemon {
+    .locate(10, 0, 21px);
+  }
+
+  &.pieapple {
+    .locate(11, 0, 23px);
+  }
+
+  &.banana {
+    .locate(12, 0, 25px);
+  }
+
+  &.nut {
+    .locate(13, 0, 27px);
+  }
+}

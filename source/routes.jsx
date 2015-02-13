@@ -14,6 +14,7 @@ var App = require('./client/components/App.jsx');
 var Game = require('./client/components/Game.jsx');
 var Demo = require('./client/components/Demo.jsx');
 var Login = require('./client/components/Login.jsx');
+var Sprite = require('./client/components/Sprite.jsx');
 var PageNotFound = require('./client/components/PageNotFound.jsx');
 
 var Routes = [
@@ -21,6 +22,7 @@ var Routes = [
     <DefaultRoute name="game" handler={ Game } />
     <Route name="demo" path="/demo" handler={ Demo } />
     <Route name="login" path="/login" handler={ Login } />
+    <Route name="sprite" path="/sprite" handler={ Sprite } />
   </Route>,
   <NotFoundRoute handler={ PageNotFound } />
 ];
