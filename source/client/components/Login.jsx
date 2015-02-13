@@ -65,7 +65,11 @@ var Login = React.createClass({
     var player = this.getState().player;
     var isLoggingIn = player.isLoggingIn;
 
-    var loginInputClasses = classSet({
+    var formClasses = classSet({
+      'move-hidden': isLoggingIn
+    });
+
+    var buttonInputClasses = classSet({
       'hidden': isLoggingIn
     });
 
@@ -89,6 +93,10 @@ var Login = React.createClass({
       width: '100%'
     };
 
+    var progressBarClasses = classSet({
+      'active': isLoggingIn
+    });
+
     return (
       <div className="login">
         <div className={ loginContainerClasses }>
@@ -97,14 +105,14 @@ var Login = React.createClass({
             { chance.pick(facts) }
           </div>
           <div className={ loadingBarClasses }>
-            <div className="progress-bar progress-bar-striped active" style={ progressBarStyle }></div>
+            <div className={ joinClasses(progressBarClasses, 'progress-bar progress-bar-striped' ) } style={ progressBarStyle }></div>
           </div>
-          <form className={ joinClasses(loginInputClasses, 'login-form') } onSubmit={ this.login }>
+          <form className={ joinClasses(formClasses, 'login-form') } onSubmit={ this.login }>
             <input type="text" name="username" className="form-control" placeholder="Username" />
             <input type="password" name="password" className="form-control" placeholder="Password" />
-            <button className="btn btn-primary btn-block btn-login" type="submit">Login</button>
+            <button className={ joinClasses(buttonInputClasses, 'btn btn-primary btn-block btn-login') } type="submit">Login</button>
           </form>
-          <div className={ joinClasses(loginInputClasses, 'register-container') }>
+          <div className={ joinClasses(formClasses, 'register-container') }>
             <button className="btn btn-link btn-block btn-register">Don't have an account? <b>Sign Up Here!</b></button>
           </div>
         </div>

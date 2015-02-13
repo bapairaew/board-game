@@ -42,10 +42,9 @@
   background-color: lighten(@btn-default-bg, 10%);
   .box-shadow(0 3px darken(@btn-default-bg, 20%));
   z-index: 9;
-  .animation(showpanel 300ms cubic-bezier(0.215, 0.61, 0.355, 1));
+  .animation(showpanel 300ms @elastic);
 }
 
-/* Chrome, Safari, Opera */
 @keyframes showpanel {
   from {
     height: 0;
