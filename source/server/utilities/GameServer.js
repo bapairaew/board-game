@@ -37,9 +37,9 @@ var GameServer = {
       });
 
       // TODO: duplicate code
-      socket.on(WalkActionType.WALK, function (place) {
+      socket.on(WalkActionType.WALK, function (cell) {
         try {
-          player.walk(place, environment);
+          player.walk(cell, environment);
           socket.emit(WalkActionType.WALK_SUCCESS, player);
           socket.broadcast.emit(WalkActionType.WALK_SUCCESS, player.publicize());
         } catch (ex) {

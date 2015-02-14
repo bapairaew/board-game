@@ -2,7 +2,7 @@
 
 var Creature = require('./Creature');
 var Token = require('./Token');
-var Place = require('./places/Place');
+var Cell = require('./places/Cell');
 
 var ItemParser = require('./items/ItemParser');
 
@@ -22,7 +22,7 @@ Player.prototype.coins = null;
 
 Player.prototype.token = null;
 
-Player.prototype.place = null;
+Player.prototype.cell = null;
 
 Player.prototype.online = null;
 
@@ -39,12 +39,12 @@ Player.prototype.update = function (player) {
   this.online = player.online;
   this.items = ItemParser.parseMany(player.items);
   enitityUpdate(this, 'token', player.token, Token);
-  enitityUpdate(this, 'place', player.place, Place);
+  enitityUpdate(this, 'cell', player.cell, Cell);
 };
 
 // Override
 Player.prototype.publics = function () {
-  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'place', 'online', 'items']);
+  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'cell', 'online', 'items']);
 };
 
 module.exports = Player;

@@ -31,7 +31,7 @@ var sortPlayer = function (a, b) {
 var getPlayerItem = function (player, idx) {
   return (
     <li key={ player.id || 'undefined' } className={ player.online ? 'online' : '' }>
-      { toString(player.name) } - { toString(player.place) }
+      { toString(player.name) } - { toString(player.cell) }
     </li>
   );
 };
@@ -86,8 +86,8 @@ var Demo = React.createClass({
               <dd>{ this.state.player.coins }</dd>
               <dt>Token</dt>
               <dd>{ toString(this.state.player.token) }</dd>
-              <dt>Place</dt>
-              <dd>{ toString(this.state.player.place) }</dd>
+              <dt>Cell</dt>
+              <dd>{ toString(this.state.player.cell) }</dd>
             </dl>
             <button className="btn btn-primary" onClick={ roll }>Roll</button>
             <button className="btn btn-primary" style={ walkButton } onClick={ walk }>Walk</button>

@@ -10,7 +10,7 @@ var ConsumableServer = require('../models/items/ConsumableServer');
 var ScrollServer = require('../models/items/ScrollServer');
 var WeaponServer = require('../models/items/WeaponServer');
 
-var PlaceServer = require('../models/places/PlaceServer');
+var CellServer = require('../models/places/CellServer');
 var ChurchServer = require('../models/places/ChurchServer');
 var PortalServer = require('../models/places/PortalServer');
 var TownServer = require('../models/places/TownServer');
@@ -40,10 +40,10 @@ var mockItem = function (item) {
   return item;
 };
 
-var mockPlace = function (place) {
-  place.id = chance.guid();
-  place.name = chance.word();
-  return place;
+var mockCell = function (cell) {
+  cell.id = chance.guid();
+  cell.name = chance.word();
+  return cell;
 };
 
 var Mockup = {
@@ -62,10 +62,10 @@ var Mockup = {
     var tresureItems = environment.items.filter(function (item) { return item instanceof TreasureServer; });
     tresureItems.forEach(function (treasure) { treasure.contents = chance.pick(nonTreasureItems, 10); });
 
-    var allPlaces = _.flatten(environment.maps.map(function (map) { return map.places; }));
-    var nonPortalPlaces = allPlaces.filter(function (place) { return !(place instanceof PortalServer); });
-    var portalPlaces = allPlaces.filter(function (place) { return place instanceof PortalServer; });
-    portalPlaces.forEach(function (place) { place.destination = chance.pick(nonPortalPlaces); });
+    var allCells = _.flatten(environment.maps.map(function (map) { return map.places; }));
+    var nonPortalCells = allCells.filter(function (cell) { return !(cell instanceof PortalServer); });
+    var portalCells = allCells.filter(function (cell) { return cell instanceof PortalServer; });
+    portalCells.forEach(function (cell) { cell.destination = chance.pick(nonPortalCells); });
 
     return environment;
   },
@@ -77,7 +77,7 @@ var Mockup = {
     player.token = null;
     player.online = false;
     if (environment instanceof EnvironmentServer) {
-      player.place = Mockup.randomPlace(environment);
+      player.cell = Mockup.randomCell(environment);
       player.items = chance.pick(environment.items, chance.integer({ min: 5, max: 10 }));
     }
     return player;
@@ -86,7 +86,7 @@ var Mockup = {
     var map = new Map();
     map.id = chance.guid();
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
-      .forEach(function () { map.places.push(Mockup.place()); });
+      .forEach(function () { map.places.push(Mockup.cell()); });
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
       .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
     return map;
@@ -138,37 +138,37 @@ var Mockup = {
     }
     return weapon;
   },
-  place: function () {
-    var place = chance.weighted([Mockup.cell, Mockup.church, Mockup.portal, Mockup.town, Mockup.treasure],
-    [90, 2.5, 2.5, 2.5, 2.5])();
-    place.position = new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 }));
-    return place;
-  },
   cell: function () {
-    var placeServer = new PlaceServer();
-    mockPlace(placeServer);
-    return placeServer;
+    var cell = chance.weighted([Mockup.emptyCell, Mockup.church, Mockup.portal, Mockup.town, Mockup.treasure],
+    [90, 2.5, 2.5, 2.5, 2.5])();
+    cell.position = new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 }));
+    return cell;
+  },
+  emptyCell: function () {
+    var cellServer = new CellServer();
+    mockCell(cellServer);
+    return cellServer;
   },
   church: function () {
     var church = new ChurchServer();
-    mockPlace(church);
+    mockCell(church);
     return church;
   },
   portal: function () {
     var portal = new PortalServer();
-    mockPlace(portal);
+    mockCell(portal);
     // portal.destination
     return portal;
   },
   town: function () {
     var town = new TownServer();
-    mockPlace(town);
+    mockCell(town);
     town.income = chance.integer({ min: 10, max: 500 });
     return town;
   },
   treasure: function () {
     var treasure = new TreasureServer();
-    mockPlace(treasure);
+    mockCell(treasure);
     // treasure.contents
     return treasure;
   },
@@ -184,7 +184,7 @@ var Mockup = {
   randomPlayer: function (environment) {
     return chance.pick(environment.players);
   },
-  randomPlace: function (environment) {
+  randomCell: function (environment) {
     return chance.pick(chance.pick(environment.maps).places);
   }
 };

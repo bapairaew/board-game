@@ -2,7 +2,7 @@
 
 var Environment = require('../../models/Environment');
 
-var PlaceServer = require('./places/PlaceServer');
+var CellServer = require('./places/CellServer');
 
 function EnvironmentServer() {
   Environment.call(this);
@@ -29,10 +29,10 @@ EnvironmentServer.prototype.removePlayer = function (player) {
   }
 };
 
-EnvironmentServer.prototype.getPlace = function (place) {
-  // TODO: search for place in maps
-  var _place = new PlaceServer();
-  _place.update(place);
+EnvironmentServer.prototype.getCell = function (cell) {
+  // TODO: search for cell in maps
+  var _place = new CellServer();
+  _place.update(cell);
   return _place;
 };
 

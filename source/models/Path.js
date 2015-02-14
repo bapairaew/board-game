@@ -1,7 +1,7 @@
 'use strict';
 
 var Entity = require('./Entity');
-var Place = require('./places/Place');
+var Cell = require('./places/Cell');
 
 var enitityUpdate = require('../utilities/enitityUpdate');
 
@@ -15,8 +15,8 @@ Path.prototype.exit2 = null;
 
 Path.prototype.update = function (path) {
   Entity.prototype.update.call(this, path);
-  enitityUpdate(this, 'exit1', path.exit1, Place);
-  enitityUpdate(this, 'exit2', path.exit2, Place);
+  enitityUpdate(this, 'exit1', path.exit1, Cell);
+  enitityUpdate(this, 'exit2', path.exit2, Cell);
 };
 
 module.exports = Path;
