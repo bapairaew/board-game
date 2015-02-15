@@ -1,0 +1,95 @@
+.player-info,
+.player-nav,
+.player-tab {
+  position: absolute;
+  right: 5px;
+  left: 5px;
+}
+
+.player-info {
+  top: 5px;
+  padding: 30px;
+  height: 100px;
+  background: @gray-07;
+}
+
+.player-avatar {
+  margin-top: -5px;
+  margin-right: 5px;
+  .box-shadow(0 0 0 2px @brand-primary);
+}
+
+.player-info-item {
+  display: inline-block;
+  width: 110px;
+  margin-left: 10px;
+  text-align: right;
+  vertical-align: top;
+
+  .player-info-item-main {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+
+    &.highlight {
+      font-weight: bold;
+    }
+  }
+
+  .player-info-item-sub {
+    margin-top: -2px;
+    color: @gray-05;
+    text-transform: lowercase;
+    font-weight: lighter;
+  }
+}
+
+.player-nav {
+  top: 105px;
+
+  > li {
+    float: left;
+
+    > a {
+      color: @gray-05;
+
+      &:hover {
+        background: transparent;
+        color: @text-color;
+      }
+    }
+
+    &.active {
+      > a {
+        background: @gray-07;
+        color: @text-color;
+      }
+    }
+  }
+}
+
+.player-tab {
+  top: 145px;
+  bottom: 5px;
+  padding-top: 10px;
+  overflow: auto;
+  background: @gray-07;
+}
+
+.player-item-list {
+  .player-item-list-item {
+    height: 45px;
+    width: 45px;
+    float: left;
+    text-align: center;
+    margin: 17px;
+
+    background-color: lighten(@btn-default-bg, 10%); // TODO: make it a variable
+    border-radius: 50%;
+    .box-shadow(0 0 0 2px @gray-10);
+
+    .game-object {
+      margin-top: 5px;
+    }
+  }
+}

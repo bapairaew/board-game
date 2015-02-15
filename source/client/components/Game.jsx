@@ -66,7 +66,7 @@ var Game = React.createClass({
           <GameFinancePanel />
         );
         break;
-      case Menus.Avatar:
+      case Menus.AVATAR:
         panel = (
           <GameGeneralPanel />
         );
@@ -97,11 +97,14 @@ var Game = React.createClass({
     var panel = this.getPanel();
 
     var avatarStyle = {
-      'backgroundImage': 'url(//lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAADO1I/QzjOGHq5kNQ/s120-c/photo.jpg)'
+      'backgroundImage': 'url(http://cdn8.staztic.com/app/a/5112/5112202/rubick-loadout-1-l-48x48.png)'
     };
 
+    var remainingHp = 60;
+    var maxHp = 100;
+
     var progressBarStyle = {
-      'width': '60%'
+      'width': (remainingHp * 100 / maxHp) + '%'
     };
 
     var hpButtonClasses = classSet({
@@ -118,12 +121,15 @@ var Game = React.createClass({
 
     return (
       <div className="game" tabIndex="1" onClick={ this.togglePanel }>
-        <div className="game-toolbar" tabIndex="1" onClick={ this.stopPropagation }>
-          <div className="btn-group">
+        <div className="game-toolbar">
+          <button className="btn btn-primary game-btn-roll">Roll</button>
+          <div className="btn-group" tabIndex="1" onClick={ this.stopPropagation }>
             <button className={ joinClasses(hpButtonClasses, 'btn btn-default game-hp-bar-container') }
               onClick={ this.togglePanel.bind(this, Menus.HP) }>
               <div className="progress">
-                <div className="progress-bar" style={ progressBarStyle }></div>
+                <div className="progress-bar" style={ progressBarStyle }>
+                  { remainingHp } / { maxHp }
+                </div>
               </div>
             </button>
             <button className={ joinClasses(coinButtonClasses, 'btn btn-default') }

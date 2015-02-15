@@ -1,22 +1,21 @@
 .pane-content-enter {
   position: absolute;
 
-  transition: transform 300ms ease-out;
-  transform: translate3d(100%, 0, 0);
-  z-index: 10000;
+  .transition-transform(300ms ease);
+  .translate(100%, 0);
 
   &.pane-content-enter-active {
-    transform: translate3d(0, 0, 0);
+    .translate(0, 0);
   }
 }
 
 .pane-content-leave {
   position: absolute;
 
-  transition: transform 300ms ease-out;
-  transform: translate3d(0 ,0, 0);
+  .transition-transform(300ms ease);
+  .translate(0 ,0);
 
   &.pane-content-leave-active {
-    transform: translate3d(-100%, 0, 0);
+    .translate(-100%, 0);
   }
 }

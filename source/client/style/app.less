@@ -6,19 +6,23 @@
 @import "./progress-bars";
 @import "./list-group";
 
-// TO BE REMOVED
-@import "./demo";
-@import "./player-list";
-
 @import "./page-transition";
 @import "./pane-content-transition";
 @import "./avatar";
 @import "./coins";
 @import "./hidden";
 @import "./sprite";
+@import "./scrollbars";
+@import "./player-cards";
+@import "./player-panel";
 
 @import "./login";
 @import "./game";
+@import "./game-panels";
+
+// TO BE REMOVED
+@import "./demo";
+@import "./player-list";
 
 // TODO: move these
 html,
@@ -28,10 +32,15 @@ body,
   width: 100%;
   height: 100%;
   padding: 0;
+  overflow-x: hidden;
 }
 
 :focus {
   outline-color: @brand-primary;
+}
+
+.no-margin {
+  margin: 0 !important;
 }
 
 @elastic: cubic-bezier(0.215, 0.61, 0.355, 1);

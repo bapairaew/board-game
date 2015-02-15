@@ -2,6 +2,7 @@
 
 var path = require('path');
 var express = require('express');
+var favicon = require('serve-favicon');
 var browserify = require('connect-browserify');
 var http = require('http');
 
@@ -21,11 +22,11 @@ if (process.env.NODE_ENV !== 'production') {
     }));
 }
 
+var assets = path.join(__dirname, 'assets');
+
 app.use('/build', express.static(path.join(__root, 'build')))
-  .use('/assets', express.static(path.join(__dirname, 'assets')))
-  .get('/favicon.ico', function (req, res, next) {
-    res.send();
-  })
+  .use('/assets', express.static(assets))
+  .use(favicon(path.join(assets, 'eikonia.ico')))
   .use(Server.render);
 
 var server = http.Server(app);
