@@ -5,7 +5,33 @@
 
 var React = require('react');
 
+var joinClasses = require('../../utilities/joinClasses');
+
 var GameGeneralPanel = React.createClass({
+  demoItems: [
+    'clarity',
+    'branch',
+    'ring',
+    'wand',
+    'band',
+    'basilius',
+    'force',
+    'crystalys',
+    'hood',
+    'dominator',
+    'demon'
+  ],
+
+  getItemElements: function (items) {
+    return items.map(function (item) {
+      return (
+        <div className="player-item-list-item">
+          <div className={ joinClasses(item, 'game-item') }></div>
+        </div>
+      )
+    });
+  },
+
   render: function () {
     var avatarStyle = {
       'backgroundImage': 'url(http://cdn8.staztic.com/app/a/5112/5112202/rubick-loadout-1-l-48x48.png)'
@@ -35,33 +61,7 @@ var GameGeneralPanel = React.createClass({
         </ul>
         <div className="player-tab">
           <div className="player-item-list">
-            <div className="player-item-list-item">
-              <div className="game-object banana"></div>
-            </div>
-            <div className="player-item-list-item">
-              <div className="game-object red-fruit"></div>
-            </div>
-            <div className="player-item-list-item">
-              <div className="game-object nut"></div>
-            </div>
-              <div className="player-item-list-item">
-                <div className="game-object banana"></div>
-              </div>
-              <div className="player-item-list-item">
-                <div className="game-object red-fruit"></div>
-              </div>
-              <div className="player-item-list-item">
-                <div className="game-object nut"></div>
-              </div>
-                <div className="player-item-list-item">
-                  <div className="game-object banana"></div>
-                </div>
-                <div className="player-item-list-item">
-                  <div className="game-object red-fruit"></div>
-                </div>
-                <div className="player-item-list-item">
-                  <div className="game-object nut"></div>
-                </div>
+            { this.getItemElements(this.demoItems) }
           </div>
         </div>
       </div>

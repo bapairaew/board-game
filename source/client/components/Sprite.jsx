@@ -8,26 +8,27 @@ var joinClasses = require('../../utilities/joinClasses');
 
 var Sprite = React.createClass({
   objects: [
-    'black-fruit',
-    'red-fruit',
-    'green-apple',
-    'red-apple',
-    'orange',
-    'green-grape',
-    'purple-grape',
-    'watermelon',
-    'strawberry',
-    'green-fruit',
-    'lemon',
-    'pieapple',
-    'banana',
-    'nut'
+    'clarity',
+    'branch',
+    'ring',
+    'wand',
+    'band',
+    'basilius',
+    'force',
+    'crystalys',
+    'hood',
+    'dominator',
+    'demon'
   ],
 
   getObjectsElement: function (objects) {
+    var style = {
+      'marginLeft': '10px'
+    };
+
     return objects.map(function (object) {
       return (
-        <div key={ object } className={ joinClasses('game-object', object) }></div>
+        <div key={ object } style={ style } className={ joinClasses('game-item', object) }></div>
       );
     });
   },

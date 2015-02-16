@@ -1,0 +1,15 @@
+@import "./item-sprite";
+@import "./skill-sprite";
+
+@object-size: 45px;
+
+.game-object(@bgimage) {
+  display: inline-block;
+  width: @object-size;
+  height: @object-size;
+  background-image: @bgimage;
+}
+
+.game-object-locate(@col; @row; @xoff: 0; @yoff: 0) {
+  background-position: ((@col * -1 * @object-size) - @xoff) ((@row * -1 * @object-size) - @yoff);
+}
