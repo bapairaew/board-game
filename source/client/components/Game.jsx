@@ -52,49 +52,38 @@ var Game = React.createClass({
     event.stopPropagation();
   },
 
-  getPanelContent: function () {
-    var panel = null;
-
-    switch (this.activeMenu) {
+  getPanelContent: function (menu) {
+    switch (menu) {
       case Menus.HP:
-        panel = (
+        return (
           <GameBattlePanel />
         );
-        break;
       case Menus.COIN:
-        panel = (
+        return (
           <GameFinancePanel />
         );
-        break;
       case Menus.AVATAR:
-        panel = (
+        return (
           <GameGeneralPanel />
         );
-        break;
     }
 
-    return (
-      <div key={ this.activeMenu } className="game-panel-container">
-        { panel }
-      </div>
-    );
+    return null;
   },
 
-  getPanel: function () {
-    // dummy div 'panel' is used for fixing react issue
-    // message:
-    // transition(): tried to perform an animation without an animationend or transitionend event after timeout (5000ms). You should either disable this transition in JS or add a CSS animation/transition.
-    // https://github.com/facebook/react/issues/1707
-    return !this.showPanel ? null : (
+  getPanel: function (menu) {
+    return (
       <ReactCSSTransitionGroup className="game-panel" tabIndex="1" onClick={ this.stopPropagation }
         component="div" transitionName="pane-content">
-        { this.getPanelContent() }
+        <div key={ menu } className="game-panel-container">
+          { this.getPanelContent(menu) }
+        </div>
       </ReactCSSTransitionGroup>
     );
   },
 
   render: function () {
-    var panel = this.getPanel();
+    var panel = this.showPanel ? this.getPanel(this.activeMenu) : null;
 
     var avatarStyle = {
       'backgroundImage': 'url(http://cdn8.staztic.com/app/a/5112/5112202/rubick-loadout-1-l-48x48.png)'

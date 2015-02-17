@@ -3,39 +3,73 @@
 */
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
+var classSet = React.addons.classSet;
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-var joinClasses = require('../../utilities/joinClasses');
+var PlayerItems = require('./PlayerItems.jsx');
+var PlayerBadges = require('./PlayerBadges.jsx');
+var PlayerFriends = require('./PlayerFriends.jsx');
+var PlayerSettings = require('./PlayerSettings.jsx');
+
+var Tabs = {
+  ITEMS: 'ITEMS',
+  BADGES: 'BADGES',
+  FRIENDS: 'FRIENDS',
+  SETTINGS: 'SETTINGS'
+};
 
 var GameGeneralPanel = React.createClass({
-  demoItems: [
-    'clarity',
-    'branch',
-    'ring',
-    'wand',
-    'band',
-    'basilius',
-    'force',
-    'crystalys',
-    'hood',
-    'dominator',
-    'demon'
-  ],
+  activeTab: Tabs.ITEMS,
 
-  getItemElements: function (items) {
-    return items.map(function (item) {
-      return (
-        <div className="player-item-list-item">
-          <div className={ joinClasses(item, 'game-item') }></div>
-        </div>
-      )
-    });
+  changeTab: function (tab) {
+    this.activeTab = tab;
+    this.forceUpdate();
+  },
+
+  getTabContent: function (tab) {
+    switch (tab) {
+      case Tabs.ITEMS:
+        return (
+          <PlayerItems />
+        );
+      case Tabs.BADGES:
+        return (
+          <PlayerBadges />
+        );
+      case Tabs.FRIENDS:
+        return (
+          <PlayerFriends />
+        );
+      case Tabs.SETTINGS:
+        return (
+          <PlayerSettings />
+        );
+    }
+
+    return null;
   },
 
   render: function () {
     var avatarStyle = {
       'backgroundImage': 'url(http://cdn8.staztic.com/app/a/5112/5112202/rubick-loadout-1-l-48x48.png)'
     };
+
+    var itemsTabClasses = classSet({
+      'active': this.activeTab === Tabs.ITEMS
+    });
+
+    var badgesTabClasses = classSet({
+      'active': this.activeTab === Tabs.BADGES
+    });
+
+    var friendsTabClasses = classSet({
+      'active': this.activeTab === Tabs.FRIENDS
+    });
+
+    var settingsTabClasses = classSet({
+      'active': this.activeTab === Tabs.SETTINGS
+    });
 
     return (
       <div>
@@ -55,15 +89,14 @@ var GameGeneralPanel = React.createClass({
           </div>
         </div>
         <ul className="nav player-nav">
-          <li className="active"><a href="#">Items</a></li>
-          <li><a href="#">Badges</a></li>
-          <li><a href="#">Friends</a></li>
+          <li key="items" className={ itemsTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.ITEMS) }>Items</a></li>
+          <li key="badges" className={ badgesTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.BADGES) }>Badges</a></li>
+          <li key="friends" className={ friendsTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.FRIENDS) }>Friends</a></li>
+          <li key="settings" className={ settingsTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.SETTINGS) }>Settings</a></li>
         </ul>
-        <div className="player-tab">
-          <div className="player-item-list">
-            { this.getItemElements(this.demoItems) }
-          </div>
-        </div>
+        <ReactCSSTransitionGroup className="player-tab" component="div" transitionName="pane-content">
+          { this.getTabContent(this.activeTab) }
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

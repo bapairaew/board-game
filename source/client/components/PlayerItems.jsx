@@ -1,0 +1,44 @@
+/**
+* @jsx React.DOM
+*/
+'use strict';
+
+var React = require('react');
+
+var joinClasses = require('../../utilities/joinClasses');
+
+var PlayerItems = React.createClass({
+  demoItems: [
+    'clarity',
+    'branch',
+    'ring',
+    'wand',
+    'band',
+    'basilius',
+    'force',
+    'crystalys',
+    'hood',
+    'dominator',
+    'demon'
+  ],
+
+  getItemElements: function (items) {
+    return items.map(function (item) {
+      return (
+        <div key={ item } className="player-item-list-item">
+          <div className={ joinClasses(item, 'game-item') }></div>
+        </div>
+      )
+    });
+  },
+
+  render: function () {
+    return (
+      <div className="player-item-list">
+        { this.getItemElements(this.demoItems) }
+      </div>
+    );
+  }
+});
+
+module.exports = PlayerItems;

@@ -15,10 +15,10 @@ var GameFinancePanel = React.createClass({
         <div className="game-panel-content summary-content">
           <ul className="list-group no-margin">
             <li className="list-group-item">
-              Earning:
+              Week Summary:
             </li>
             <li className="list-group-item">
-              Spending:
+              Passive Income:
             </li>
           </ul>
         </div>
