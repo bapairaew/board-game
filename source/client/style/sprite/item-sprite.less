@@ -1,0 +1,51 @@
+.game-item {
+  .game-object(url(/assets/item-sprite.png));
+
+  .game-item-locate(@row; @col; @xoff: 0) {
+    .game-object-locate(@row, @col, (@row + 1) * 10px + @xoff, 0);
+  }
+
+  &.clarity {
+    .game-item-locate(0, 0);
+  }
+
+  &.branch {
+    .game-item-locate(1, 0);
+  }
+
+  &.ring {
+    .game-item-locate(2, 0, 8px);
+  }
+
+  &.wand {
+    .game-item-locate(3, 0, 20px);
+  }
+
+  &.band {
+    .game-item-locate(4, 0, 20px);
+  }
+
+  &.basilius {
+    .game-item-locate(5, 0, 23px);
+  }
+
+  &.force {
+    .game-item-locate(6, 0, 33px);
+  }
+
+  &.crystalys {
+    .game-item-locate(7, 0, 35px);
+  }
+
+  &.hood {
+    .game-item-locate(8, 0, 43px);
+  }
+
+  &.dominator {
+    .game-item-locate(9, 0, 46px);
+  }
+
+  &.demon {
+    .game-item-locate(10, 0, 50px);
+  }
+}
