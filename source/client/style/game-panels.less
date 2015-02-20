@@ -63,13 +63,17 @@
 }
 
 .game-panel-status-list {
-  padding: 4px 15px;
+  padding: 4px;
   overflow: hidden;
 
   .game-skill {
     .scale(0.7, 0.7);
     margin: -6px 4px;
     vertical-align: middle;
+  }
+
+  .game-skill:first-child {
+    margin-left: 0;
   }
 
   &.buff,
