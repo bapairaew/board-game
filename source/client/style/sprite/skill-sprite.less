@@ -1,0 +1,31 @@
+.game-skill {
+  .game-object(url(/assets/skill-sprite.png));
+
+  .game-skill-locate(@col; @row; @xoff: 0; @yoff: 0) {
+    .game-object-locate(@col, @row, @xoff, @yoff);
+  }
+
+  &.reality {
+    .game-skill-locate(0, 0);
+  }
+
+  &.synergy {
+    .game-skill-locate(1, 0);
+  }
+
+  &.primal-spirit {
+    .game-skill-locate(2, 0);
+  }
+
+  &.forst-bite {
+    .game-skill-locate(16, 7, 7px, 3px);
+  }
+
+  &.battle-hunger {
+    .game-skill-locate(3, 2, 4px, 1px);
+  }
+
+  &.rot {
+    .game-skill-locate(1, 7);
+  }
+}

@@ -14,15 +14,15 @@ var GameBattlePanel = React.createClass({
         </div>
         <div className="game-panel-content summary-content">
           <ul className="list-group no-margin">
-            <li className="list-group-item game-panel-status-list">
-              <div className="game-object empower"></div>
-              <div className="game-object attack-up"></div>
-              <div className="game-object defense-up"></div>
-              <div className="game-object speed-up"></div>
+            <li className="list-group-item game-panel-status-list buff">
+              <div className="game-skill reality"></div>
+              <div className="game-skill synergy"></div>
+              <div className="game-skill primal-spirit"></div>
             </li>
-            <li className="list-group-item game-panel-status-list">
-              <div className="game-object stoned"></div>
-              <div className="game-object unfortuned"></div>
+            <li className="list-group-item game-panel-status-list debuff">
+              <div className="game-skill forst-bite"></div>
+              <div className="game-skill battle-hunger"></div>
+              <div className="game-skill rot"></div>
             </li>
           </ul>
         </div>

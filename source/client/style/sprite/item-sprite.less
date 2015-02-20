@@ -1,8 +1,8 @@
 .game-item {
   .game-object(url(/assets/item-sprite.png));
 
-  .game-item-locate(@row; @col; @xoff: 0) {
-    .game-object-locate(@row, @col, (@row + 1) * 10px + @xoff, 0);
+  .game-item-locate(@col; @row; @xoff: 0) {
+    .game-object-locate(@col, @row, (@col + 1) * 10px + @xoff, 1px);
   }
 
   &.clarity {
@@ -22,7 +22,7 @@
   }
 
   &.band {
-    .game-item-locate(4, 0, 20px);
+    .game-item-locate(4, 0, 27px);
   }
 
   &.basilius {
@@ -30,22 +30,22 @@
   }
 
   &.force {
-    .game-item-locate(6, 0, 33px);
+    .game-item-locate(6, 0, 42px);
   }
 
   &.crystalys {
-    .game-item-locate(7, 0, 35px);
+    .game-item-locate(7, 0, 44px);
   }
 
   &.hood {
-    .game-item-locate(8, 0, 43px);
+    .game-item-locate(8, 0, 52px);
   }
 
   &.dominator {
-    .game-item-locate(9, 0, 46px);
+    .game-item-locate(9, 0, 54px);
   }
 
   &.demon {
-    .game-item-locate(10, 0, 50px);
+    .game-item-locate(10, 0, 59px);
   }
 }
