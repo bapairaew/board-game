@@ -3,7 +3,8 @@
 */
 'use strict';
 
-var React = require('react');
+var React = require('react/addons');
+var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 var joinClasses = require('../../utilities/joinClasses');
 
@@ -34,9 +35,9 @@ var PlayerItems = React.createClass({
 
   render: function () {
     return (
-      <div className="player-item-list">
+      <ReactCSSTransitionGroup className="player-item-list" transitionName="item">
         { this.getItemElements(this.demoItems) }
-      </div>
+      </ReactCSSTransitionGroup>
     );
   }
 });

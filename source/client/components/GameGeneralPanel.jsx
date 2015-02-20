@@ -95,7 +95,9 @@ var GameGeneralPanel = React.createClass({
           <li key="settings" className={ settingsTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.SETTINGS) }>Settings</a></li>
         </ul>
         <ReactCSSTransitionGroup className="player-tab" component="div" transitionName="pane-content">
-          { this.getTabContent(this.activeTab) }
+          <div key={ this.activeTab }>
+            { this.getTabContent(this.activeTab) }
+          </div>
         </ReactCSSTransitionGroup>
       </div>
     );

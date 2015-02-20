@@ -1,0 +1,55 @@
+.slide-up-start() {
+  opacity: 0;
+  .translate(0, 50px);
+}
+
+.slide-up-end() {
+  opacity: 1;
+  .translate(0, 0);
+}
+
+.game-item {
+  .animation(slide-up 800ms @elastic);
+}
+
+.item-enter {
+  .transition-transform(800ms ease);
+  .slide-up-end();
+
+  &.page-enter-active {
+    .translate(0, 0);
+  }
+}
+
+.item-leave {
+  .transition(all 800ms ease);
+  .slide-up-end();
+
+  &.page-leave-active {
+    .slide-up-start();
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    .slide-up-start();
+  }
+  50% {
+    .slide-up-start();
+  }
+  100% {
+    .slide-up-end();
+  }
+}
+
+@-webkit-keyframes slide-up {
+  0% {
+    .slide-up-start();
+  }
+  50% {
+    .slide-up-start();
+  }
+  100% {
+    .slide-up-end();
+  }
+}

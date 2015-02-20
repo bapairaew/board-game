@@ -57,12 +57,14 @@
         background: transparent;
         color: @text-color;
       }
+
+      .transition(background 300ms @elastic);
     }
 
     &.active {
       > a {
-        background: @gray-07;
         color: @text-color;
+        background: @gray-07;
       }
     }
   }
