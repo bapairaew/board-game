@@ -5,8 +5,59 @@
 
 var React = require('react');
 
+// TO BE REMOVED
+var Chance = require('Chance');
+var chance = new Chance();
+var BattleLog = require('../../models/logs/BattleLog');
+var BattleLogType = require('../../constants/BattleLogType');
+
+var joinClasses = require('../../utilities/joinClasses');
+
 var GameBattlePanel = React.createClass({
   render: function () {
+    var buffs = [
+      'primal-spirit',
+      'synergy',
+      'reality'
+    ];
+
+    var debuffs = [
+      'forst-bite',
+      'battle-hunger',
+      'rot'
+    ];
+
+    // TO BE REMOVED
+    var mockUpLog = function () {
+      var log = new BattleLog();
+      log.subject = chance.name();
+      log.action = BattleLogType[chance.pick(Object.keys(BattleLogType))];
+      log.object = chance.name();
+      return log;
+    };
+
+    var logs = chance.n(chance.integer, 20).map(function () { return mockUpLog(); });
+
+    var getStatusElements = function (statues) {
+      return statues.map(function (status) {
+        return (
+          <div key={ status } className={ joinClasses(status, 'game-skill') } />
+        );
+      });
+    };
+
+    var getLogElements = function (logs) {
+      return logs.map(function (log, idx) {
+        // TODO: replace idx with something else??
+        return (
+          <li key={ idx } className="list-group-item inner-padding">
+            <span className={ log.getSymbolClasses() } dangerouslySetInnerHTML={{__html: log.getHTMLSymbol() }} />
+            <span dangerouslySetInnerHTML={{__html: log.toHTMLString() }} />
+          </li>
+        );
+      });
+    };
+
     return (
       <div>
         <div className="game-panel-header summary-header">
@@ -15,14 +66,10 @@ var GameBattlePanel = React.createClass({
         <div className="game-panel-content summary-content">
           <ul className="list-group no-margin">
             <li className="list-group-item game-panel-status-list buff">
-              <div className="game-skill reality"></div>
-              <div className="game-skill synergy"></div>
-              <div className="game-skill primal-spirit"></div>
+              { getStatusElements(buffs) }
             </li>
             <li className="list-group-item game-panel-status-list debuff">
-              <div className="game-skill forst-bite"></div>
-              <div className="game-skill battle-hunger"></div>
-              <div className="game-skill rot"></div>
+              { getStatusElements(debuffs) }
             </li>
           </ul>
         </div>
@@ -31,58 +78,7 @@ var GameBattlePanel = React.createClass({
         </div>
         <div className="game-panel-content details-content">
           <ul className="list-group no-margin">
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
-            <li className="list-group-item">Attack someone.</li>
-            <li className="list-group-item">Someone attack.</li>
+            { getLogElements(logs) }
           </ul>
         </div>
       </div>

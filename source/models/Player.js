@@ -28,6 +28,10 @@ Player.prototype.online = null;
 
 Player.prototype.items = [];
 
+Player.prototype.battleLogs = [];
+
+Player.prototype.financialLogs = [];
+
 Player.prototype.toString = function () {
   return stringFormat('{0}', this.name);
 };
@@ -44,7 +48,8 @@ Player.prototype.update = function (player) {
 
 // Override
 Player.prototype.publics = function () {
-  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'cell', 'online', 'items']);
+  return Creature.prototype.publics.call(this).concat(['name', 'coins', 'token', 'cell', 'online', 'items',
+    'battleLogs', 'financialLogs']);
 };
 
 module.exports = Player;
