@@ -51,8 +51,7 @@ var GameBattlePanel = React.createClass({
         // TODO: replace idx with something else??
         return (
           <li key={ idx } className="list-group-item inner-padding">
-            <span className={ log.getSymbolClasses() } dangerouslySetInnerHTML={{__html: log.getHTMLSymbol() }} />
-            <span dangerouslySetInnerHTML={{__html: log.toHTMLString() }} />
+            <span className={ joinClasses(log.getActionClass(), 'log-item') } dangerouslySetInnerHTML={{__html: log.toHTMLString() }} />
           </li>
         );
       });

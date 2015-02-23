@@ -1,4 +1,15 @@
-.log-symbol {
-  width: 44px;
-  text-align: center;
+.log-item {
+  border-left: 3px solid @gray-01;
+
+  &.positive {
+    border-color: @brand-success;
+  }
+
+  &.negative {
+    border-color: @brand-danger;
+  }
+
+  &.neutral {
+    border-color: @brand-info;
+  }
 }

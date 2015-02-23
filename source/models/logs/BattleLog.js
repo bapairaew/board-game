@@ -13,15 +13,7 @@ function BattleLog() {
 // Inheritance
 BattleLog.prototype = Object.create(Log.prototype);
 
-// Actions:
-// attack
-// be attacked
-// buff activate
-// debuff activate
-// buff expired
-// debuff expired
-// died
-// respawn
+// AREN'T THESE VIEW LOGIC???
 
 BattleLog.prototype.toHTMLString = function () {
   switch (this.action) {
@@ -45,46 +37,23 @@ BattleLog.prototype.toHTMLString = function () {
   }
 
   return stringFormat('{0} <span class="log-action {1}">{2}</span> {3}',
-    this.subject, this.getActionClass(), this.action, this.object);
-};
-
-BattleLog.prototype.getHTMLSymbol = function () {
-  switch (this.action) {
-    case BattleLogType.ATTACK:
-      return '<div class="fa fa-bolt"></div>';
-    case BattleLogType.BE_ATTACKED:
-      return '<div class="fa fa-shield"></div>';
-    case BattleLogType.BUFF_ACTIVATE:
-      return '<div class="fa fa-star"></div>';
-    case BattleLogType.DEBUFF_ACTIVATE:
-      return '<div class="fa fa-heartbeat"></div>';
-    case BattleLogType.BUFF_EXPIRED:
-      return '<div class="fa fa-star-o"></div>';
-    case BattleLogType.DEBUFF_EXPIRED:
-      return '<div class="fa fa-heart-o"></div>';
-    case BattleLogType.RESPAWN:
-      return '<div class="fa fa-user"></div>';
-    case BattleLogType.DIED:
-      return '<div class="fa fa-truck"></div>';
-    default:
-      return '<div class="fa fa-question"></div>';
-  }
+    this.subject, this.getActionClass() + '-block', this.action, this.object);
 };
 
 BattleLog.prototype.getActionClass = function () {
   switch (this.action) {
     case BattleLogType.BUFF_ACTIVATE:
     case BattleLogType.RESPAWN:
-      return 'positive-block';
+      return 'positive';
     case BattleLogType.BE_ATTACKED:
     case BattleLogType.DEBUFF_ACTIVATE:
     case BattleLogType.DIED:
-      return 'negative-block';
+      return 'negative';
     case BattleLogType.ATTACK:
     case BattleLogType.BUFF_EXPIRED:
     case BattleLogType.DEBUFF_EXPIRED:
     default:
-      return 'neutral-block';
+      return 'neutral';
   }
 };
 

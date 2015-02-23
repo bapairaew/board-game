@@ -28,20 +28,11 @@ Log.prototype.toString = function () {
   return stringFormat('{0} {1} {2}', this.subject, this.action, this.object);
 };
 
-Log.prototype.getSymbolClasses = function () {
-  return stringFormat('log-symbol {0}', this.getActionClass());
-};
-
 // TO BE OVERRIDDEN
 Log.prototype.toHTMLString = function () {
   // TODO: HTML
   return stringFormat('{0} <span class="log-action {1}">{2}</span> {3}',
     this.subject, this.getActionClass(), this.action, this.object);
-};
-
-// TO BE OVERRIDDEN
-Log.prototype.getHTMLSymbol = function () {
-  return '<div />';
 };
 
 // TO BE OVERRIDDEN
