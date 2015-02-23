@@ -98,6 +98,7 @@
   &.debuff {
     .game-skill {
       &:before {
+        content: '';
         position: absolute;
         top: 0;
         right: 0;
@@ -109,13 +110,17 @@
 
   &.buff {
     .game-skill {
-      border: 1px solid @brand-success;
+      &:before {
+        border: 3px solid @brand-success;
+      }
     }
   }
 
   &.debuff {
     .game-skill {
-      border: 1px solid @brand-danger;
+      &:before {
+        border: 3px solid @brand-danger;
+      }
     }
   }
 }
