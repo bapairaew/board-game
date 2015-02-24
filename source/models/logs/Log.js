@@ -30,7 +30,6 @@ Log.prototype.toString = function () {
 
 // TO BE OVERRIDDEN
 Log.prototype.toHTMLString = function () {
-  // TODO: HTML
   return stringFormat('{0} <span class="log-action {1}">{2}</span> {3}',
     this.subject, this.getActionClass(), this.action, this.object);
 };

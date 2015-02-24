@@ -12,6 +12,7 @@ var BattleLog = require('../../models/logs/BattleLog');
 var BattleLogType = require('../../constants/BattleLogType');
 
 var joinClasses = require('../../utilities/joinClasses');
+var getLogElements = require('../../utilities/getLogElements.jsx');
 
 var GameBattlePanel = React.createClass({
   render: function () {
@@ -42,17 +43,6 @@ var GameBattlePanel = React.createClass({
       return statues.map(function (status) {
         return (
           <div key={ status } className={ joinClasses(status, 'game-skill') } />
-        );
-      });
-    };
-
-    var getLogElements = function (logs) {
-      return logs.map(function (log, idx) {
-        // TODO: replace idx with something else??
-        return (
-          <li key={ idx } className="list-group-item inner-padding">
-            <span className={ joinClasses(log.getActionClass(), 'log-item') } dangerouslySetInnerHTML={{__html: log.toHTMLString() }} />
-          </li>
         );
       });
     };

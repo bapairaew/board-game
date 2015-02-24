@@ -10,8 +10,4 @@ function Church() {
 // Inheritance
 Church.prototype = Object.create(Cell.prototype);
 
-Church.prototype.update = function (church) {
-  Cell.prototype.update.call(this, church);
-};
-
 module.exports = Church;

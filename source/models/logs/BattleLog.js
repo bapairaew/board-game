@@ -35,9 +35,6 @@ BattleLog.prototype.toHTMLString = function () {
     default:
       return stringFormat('{0} <span class="log-action">{1}</span> {2}.', this.subject, this.action, this.object);
   }
-
-  return stringFormat('{0} <span class="log-action {1}">{2}</span> {3}',
-    this.subject, this.getActionClass() + '-block', this.action, this.object);
 };
 
 BattleLog.prototype.getActionClass = function () {
@@ -49,16 +46,12 @@ BattleLog.prototype.getActionClass = function () {
     case BattleLogType.DEBUFF_ACTIVATE:
     case BattleLogType.DIED:
       return 'negative';
-    case BattleLogType.ATTACK:
-    case BattleLogType.BUFF_EXPIRED:
-    case BattleLogType.DEBUFF_EXPIRED:
+    // case BattleLogType.ATTACK:
+    // case BattleLogType.BUFF_EXPIRED:
+    // case BattleLogType.DEBUFF_EXPIRED:
     default:
       return 'neutral';
   }
-};
-
-BattleLog.prototype.update = function (log) {
-  Log.prototype.update.call(this, log);
 };
 
 module.exports = BattleLog;
