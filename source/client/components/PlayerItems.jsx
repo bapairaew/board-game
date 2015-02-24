@@ -26,7 +26,7 @@ var PlayerItems = React.createClass({
   getItemElements: function (items) {
     return items.map(function (item) {
       return (
-        <div key={ item } className="player-item-list-item">
+        <div key={ item } className="player-item">
           <div className={ joinClasses(item, 'game-item') }></div>
         </div>
       )

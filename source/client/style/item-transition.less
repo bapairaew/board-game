@@ -1,9 +1,11 @@
-.slide-up-start() {
+// badges and items
+
+.scale-up-start() {
   opacity: 0;
   .scale(0.1, 0.1);
 }
 
-.slide-up-end() {
+.scale-up-end() {
   opacity: 1;
   .scale(1, 1);
 }
@@ -11,12 +13,12 @@
 @item-animation-time: 600ms;
 
 .game-item {
-  .animation(slide-up @item-animation-time @elastic);
+  .animation(scale-up @item-animation-time @elastic);
 }
 
 .item-enter {
   .transition-transform(@item-animation-time @elastic);
-  .slide-up-end();
+  .scale-up-end();
 
   &.page-enter-active {
     .translate(0, 0);
@@ -25,33 +27,33 @@
 
 .item-leave {
   .transition(all 800ms ease);
-  .slide-up-end();
+  .scale-up-end();
 
   &.page-leave-active {
-    .slide-up-start();
+    .scale-up-start();
   }
 }
 
-@keyframes slide-up {
+@keyframes scale-up {
   0% {
-    .slide-up-start();
+    .scale-up-start();
   }
   30% {
-    .slide-up-start();
+    .scale-up-start();
   }
   100% {
-    .slide-up-end();
+    .scale-up-end();
   }
 }
 
-@-webkit-keyframes slide-up {
+@-webkit-keyframes scale-up {
   0% {
-    .slide-up-start();
+    .scale-up-start();
   }
   30% {
-    .slide-up-start();
+    .scale-up-start();
   }
   100% {
-    .slide-up-end();
+    .scale-up-end();
   }
 }
