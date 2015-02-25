@@ -7,6 +7,8 @@ var React = require('react/addons');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
+var PlayerMixin = require('../mixins/PlayerMixin');
+
 var PlayerItems = require('./PlayerItems.jsx');
 var PlayerBadges = require('./PlayerBadges.jsx');
 var PlayerFriends = require('./PlayerFriends.jsx');
@@ -20,6 +22,8 @@ var Tabs = {
 };
 
 var GameGeneralPanel = React.createClass({
+  mixins: [PlayerMixin],
+
   activeTab: Tabs.ITEMS,
 
   changeTab: function (tab) {
@@ -76,15 +80,15 @@ var GameGeneralPanel = React.createClass({
         <div className="player-info">
           <div className="avatar player-avatar" style={ avatarStyle }></div>
           <div className="player-info-item">
-            <div className="player-info-item-main highlight">Micheal Bay</div>
+            <div className="player-info-item-main highlight">{ this.state.player.name }</div>
             <div className="player-info-item-sub">Player</div>
           </div>
           <div className="player-info-item">
-            <div className="player-info-item-main">1st</div>
+            <div className="player-info-item-main">{ this.state.player.rank }</div>
             <div className="player-info-item-sub">Ranking</div>
           </div>
           <div className="player-info-item">
-            <div className="player-info-item-main">2000</div>
+            <div className="player-info-item-main">{ this.state.player.hours }</div>
             <div className="player-info-item-sub">Hours</div>
           </div>
         </div>

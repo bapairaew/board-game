@@ -32,6 +32,14 @@ var Menus = {
 var Game = React.createClass({
   mixins: [GameMixin],
 
+  componentDidMount: function () {
+    GameClient.init(window.location.origin);
+    EnvironmentAction.listen();
+    PlayerAction.listen();
+    RollAction.listen();
+    WalkAction.listen();
+  },
+
   showPanel: false,
 
   activeMenu: Menus.AVATAR,

@@ -28,6 +28,10 @@ Player.prototype.online = null;
 
 Player.prototype.items = [];
 
+Player.prototype.rank = null;
+
+Player.prototype.hours = null;
+
 Player.prototype.battleLogs = [];
 
 Player.prototype.financialLogs = [];
@@ -42,6 +46,8 @@ Player.prototype.update = function (player) {
   this.coins = player.coins;
   this.online = player.online;
   this.items = ItemParser.parseMany(player.items);
+  this.rank = player.rank;
+  this.hours = player.hours;
   enitityUpdate(this, 'token', player.token, Token);
   enitityUpdate(this, 'cell', player.cell, Cell);
 };

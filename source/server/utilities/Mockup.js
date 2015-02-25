@@ -76,6 +76,8 @@ var Mockup = {
     player.coins = chance.integer({ min: 1, max: 20 });
     player.token = null;
     player.online = false;
+    player.rank = chance.integer({ min: 1, max: 20 });
+    player.hours = chance.integer({ min: 1, max: 2000 });
     if (environment instanceof EnvironmentServer) {
       player.cell = Mockup.randomCell(environment);
       player.items = chance.pick(environment.items, chance.integer({ min: 5, max: 10 }));
