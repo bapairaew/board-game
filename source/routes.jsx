@@ -10,12 +10,12 @@ var Route = ReactRouter.Route;
 var DefaultRoute = ReactRouter.DefaultRoute;
 var NotFoundRoute = ReactRouter.NotFoundRoute;
 
-var App = require('./client/components/App.jsx');
-var Game = require('./client/components/Game.jsx');
-var Demo = require('./client/components/Demo.jsx');
-var Login = require('./client/components/Login.jsx');
-var Sprite = require('./client/components/Sprite.jsx');
-var PageNotFound = require('./client/components/PageNotFound.jsx');
+var App = require('./client/pages/App.jsx');
+var Game = require('./client/pages/Game.jsx');
+var Demo = require('./client/pages/Demo.jsx');
+var Login = require('./client/pages/Login.jsx');
+var Sprite = require('./client/pages/Sprite.jsx');
+var PageNotFound = require('./client/pages/PageNotFound.jsx');
 
 var Routes = [
   <Route name="app" path="/" handler={ App }>
