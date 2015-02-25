@@ -38,18 +38,16 @@ var EnvironmentStore = _.extend({}, EventEmitter.prototype, {
     switch (action.actionType) {
       case EnvironmentActionType.INITIALIZED:
         environment.update(action.environment);
+        EnvironmentStore.emitChange();
         break;
       case EnvironmentActionType.ENVIRONMENT_PLAYER_CONNECTED:
       case EnvironmentActionType.ENVIRONMENT_PLAYER_DISCONNECTED:
       case RollActionType.ROLL_SUCCESS:
       case WalkActionType.WALK_SUCCESS:
         environment.updatePlayer(action.player);
+        EnvironmentStore.emitChange();
         break;
     }
-
-    // Log every actions
-    environment.logs.push(payload);
-    EnvironmentStore.emitChange();
 
     return true;
   })

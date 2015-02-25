@@ -15,8 +15,6 @@ function EnvironmentClient() {
 // Inheritance
 EnvironmentClient.prototype = Object.create(Environment.prototype);
 
-EnvironmentClient.prototype.logs = [];
-
 EnvironmentClient.prototype.addPlayer = function (player) {
   var _player = new Player();
   _player.update(player);

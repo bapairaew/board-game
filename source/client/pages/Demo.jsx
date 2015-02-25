@@ -36,15 +36,9 @@ var getPlayerItem = function (player, idx) {
   );
 };
 
-var getListItem = function (item, idx) {
-  return (
-    <li key={ idx }>{ item }</li>
-  );
-};
-
 var getListItemString = function (item, idx) {
   return (
-    <li key={ idx }>{ item.toString() }</li>
+    <li key={ item.id }>{ item.toString() }</li>
   );
 };
 
@@ -106,14 +100,6 @@ var Demo = React.createClass({
             <h4>Players</h4>
             <ul>
               { [this.state.player].concat(this.state.environment.players).sort(sortPlayer).map(getPlayerItem) }
-            </ul>
-          </div>
-        </div>
-        <div className="panel panel-default">
-          <div className="panel-body demo-list-container">
-            <h4>Logs</h4>
-            <ul>
-              { this.state.environment.logs.map(getListItem) }
             </ul>
           </div>
         </div>
