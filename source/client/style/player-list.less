@@ -1,8 +1,25 @@
 .player-list {
-  height: 300px;
-  overflow: auto;
+  .avatar {
+    margin: 10px;
+  }
 
-  .online {
-    color: @brand-success;
+  .player-name {
+    margin: 10px 0;
+  }
+
+  .player-list-item {
+    &.online {
+      color: @brand-success;
+
+      .avatar {
+        border: 2px solid @brand-success;
+      }
+    }
+
+    &:not(.online) {
+      > span {
+        opacity: 0.4;
+      }
+    }
   }
 }
