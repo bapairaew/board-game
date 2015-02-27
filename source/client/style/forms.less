@@ -1,0 +1,23 @@
+.form-control {
+  background: @gray-13;
+  color: @gray-03;
+  border-color: @gray-06;
+
+  .placeholder(@gray-06);
+
+  &:focus,
+  &.focus {
+    .box-shadow(none);
+    border-color: @brand-primary;
+  }
+
+  &.naked {
+    background: transparent;
+    color: @gray-02;
+    border: none;
+    border-bottom: 2px solid;
+    border-color: @gray-06;
+    padding: 0;
+    .box-shadow(none);
+  }
+}

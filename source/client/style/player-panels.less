@@ -10,7 +10,7 @@
   top: 5px;
   padding: 30px;
   height: 100px;
-  background: @gray-07;
+  background: @gray-10;
 }
 
 .player-avatar {
@@ -51,6 +51,9 @@
 
 .player-nav {
   top: 105px;
+  background: @gray-10;
+  z-index: 1;
+  .box-shadow(0 3px 0 -1px @gray-11);
 
   > li {
     float: left;
@@ -69,7 +72,8 @@
     &.active {
       > a {
         color: @text-color;
-        background: @gray-07;
+        font-weight: bold;
+        .box-shadow(0px -3px @brand-primary inset);
       }
     }
   }
@@ -79,5 +83,5 @@
   top: 145px;
   bottom: 5px;
   overflow: auto;
-  background: @gray-07;
+  background: @gray-08;
 }
