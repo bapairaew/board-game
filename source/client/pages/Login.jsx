@@ -21,18 +21,14 @@ var Login = React.createClass({
   mixins: [Navigation],
 
   isLoggedIn: function () {
-    var player = this.getState().player;
+    var player = this.state.player;
     return player.isLoggedIn;
   },
 
-  getState: function () {
+  getInitialState: function () {
     return {
       player: PlayerStore.get()
     };
-  },
-
-  getInitialState: function () {
-    return this.getState();
   },
 
   componentDidMount: function () {
@@ -50,7 +46,7 @@ var Login = React.createClass({
     if (this.isLoggedIn()) {
       this.transitionTo('/');
     } else {
-      this.setState(this.getState());
+      this.setState(this.state);
     }
   },
 
@@ -62,7 +58,7 @@ var Login = React.createClass({
   },
 
   render: function () {
-    var player = this.getState().player;
+    var player = this.state.player;
     var isLoggingIn = player.isLoggingIn;
 
     var formClasses = classSet({

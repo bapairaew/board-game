@@ -4,10 +4,13 @@
 'use strict';
 
 var React = require('react/addons');
+var _ = require('underscore');
+
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var updateState = React.addons.update;
 
-var PlayerMixin = require('../mixins/PlayerMixin');
+var PlayerMixin = require('../mixins/PlayerMixin')._alternate(['getInitialState']);
 
 var PlayerItems = require('./PlayerItems.jsx');
 var PlayerBadges = require('./PlayerBadges.jsx');
@@ -24,11 +27,16 @@ var Tabs = {
 var GameGeneralPanel = React.createClass({
   mixins: [PlayerMixin],
 
-  activeTab: Tabs.ITEMS,
+  getInitialState: function () {
+    return _.extend({
+      activeTab: Tabs.ITEMS
+    }, PlayerMixin._getInitialState());
+  },
 
   changeTab: function (tab) {
-    this.activeTab = tab;
-    this.forceUpdate();
+    this.setState(updateState(this.state, {
+      activeTab: { $set: tab }
+    }));
   },
 
   getTabContent: function (tab) {
@@ -60,19 +68,19 @@ var GameGeneralPanel = React.createClass({
     };
 
     var itemsTabClasses = classSet({
-      'active': this.activeTab === Tabs.ITEMS
+      'active': this.state.activeTab === Tabs.ITEMS
     });
 
     var badgesTabClasses = classSet({
-      'active': this.activeTab === Tabs.BADGES
+      'active': this.state.activeTab === Tabs.BADGES
     });
 
     var friendsTabClasses = classSet({
-      'active': this.activeTab === Tabs.FRIENDS
+      'active': this.state.activeTab === Tabs.FRIENDS
     });
 
     var settingsTabClasses = classSet({
-      'active': this.activeTab === Tabs.SETTINGS
+      'active': this.state.activeTab === Tabs.SETTINGS
     });
 
     return (
@@ -99,8 +107,8 @@ var GameGeneralPanel = React.createClass({
           <li key="settings" className={ settingsTabClasses }><a onClick={ this.changeTab.bind(this, Tabs.SETTINGS) }>Settings</a></li>
         </ul>
         <ReactCSSTransitionGroup className="player-tab" component="div" transitionName="pane-content">
-          <div key={ this.activeTab }>
-            { this.getTabContent(this.activeTab) }
+          <div key={ this.state.activeTab }>
+            { this.getTabContent(this.state.activeTab) }
           </div>
         </ReactCSSTransitionGroup>
       </div>

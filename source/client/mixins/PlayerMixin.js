@@ -1,16 +1,17 @@
 'use strict';
 
+var React = require('react/addons');
+var updateState = React.addons.update;
+
 var PlayerStore = require('../stores/PlayerStore');
 
+var alternateMixin = require('../../utilities/alternateMixin');
+
 var PlayerMixin = {
-  getState: function () {
+  getInitialState: function () {
     return {
       player: PlayerStore.get()
     };
-  },
-
-  getInitialState: function () {
-    return this.getState();
   },
 
   componentDidMount: function () {
@@ -22,7 +23,14 @@ var PlayerMixin = {
   },
 
   refreshState: function () {
-    this.setState(this.getState());
+    this.setState(updateState(this.state, {
+      player: { $set: PlayerStore.get() }
+    }));
+  },
+
+  // TODO: come up with better idea
+  _alternate: function (methods) {
+    return alternateMixin(PlayerMixin, methods);
   }
 };
 

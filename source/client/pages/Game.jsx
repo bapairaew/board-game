@@ -7,10 +7,11 @@ var _ = require('underscore');
 var React = require('react/addons');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
+var updateState = React.addons.update
 
 var joinClasses = require('../../utilities/joinClasses');
 
-var GameMixin = require('../mixins/GameMixin');
+var GameMixin = require('../mixins/GameMixin')._alternate(['getInitialState']);
 
 var GameClient = require('../utilities/GameClient');
 
@@ -32,6 +33,13 @@ var Menus = {
 var Game = React.createClass({
   mixins: [GameMixin],
 
+  getInitialState: function () {
+    return _.extend({
+      activeMenu: Menus.AVATAR,
+      showPanel: false,
+    }, GameMixin._getInitialState());
+  },
+
   componentDidMount: function () {
     GameClient.init(window.location.origin);
     EnvironmentAction.listen();
@@ -40,20 +48,21 @@ var Game = React.createClass({
     WalkAction.listen();
   },
 
-  showPanel: false,
-
-  activeMenu: Menus.AVATAR,
-
   togglePanel: function (menu) {
     // TODO: animation on hide panel.
+    var stateToUpdate = {};
     if (!_.isString(menu)) {
-      this.showPanel = false;
+      stateToUpdate = {
+        showPanel: { $set: false }
+      };
     } else {
       // Close if the click the same menu
-      this.showPanel = this.activeMenu !== menu || !this.showPanel;
-      this.activeMenu = menu;
+      stateToUpdate = {
+        showPanel: { $set: this.state.activeMenu !== menu || !this.showPanel },
+        activeMenu: { $set: menu }
+      };
     }
-    this.forceUpdate();
+    this.setState(updateState(this.state, stateToUpdate));
   },
 
   stopPropagation: function (event) {
@@ -91,7 +100,7 @@ var Game = React.createClass({
   },
 
   render: function () {
-    var panel = this.showPanel ? this.getPanel(this.activeMenu) : null;
+    var panel = this.state.showPanel ? this.getPanel(this.state.activeMenu) : null;
 
     var avatarStyle = {
       'backgroundImage': 'url(http://cdn8.staztic.com/app/a/5112/5112202/rubick-loadout-1-l-48x48.png)'
@@ -105,15 +114,15 @@ var Game = React.createClass({
     };
 
     var hpButtonClasses = classSet({
-      'menu-active': this.activeMenu === Menus.HP && this.showPanel
+      'menu-active': this.state.activeMenu === Menus.HP && this.state.showPanel
     });
 
     var coinButtonClasses = classSet({
-      'menu-active': this.activeMenu === Menus.COIN && this.showPanel
+      'menu-active': this.state.activeMenu === Menus.COIN && this.state.showPanel
     });
 
     var avatarButtonClasses = classSet({
-      'menu-active': this.activeMenu === Menus.AVATAR && this.showPanel
+      'menu-active': this.state.activeMenu === Menus.AVATAR && this.state.showPanel
     });
 
     return (

@@ -1,18 +1,19 @@
 'use strict';
 
+var React = require('react/addons');
+var updateState = React.addons.update;
+
 var EnvironmentStore = require('../stores/EnvironmentStore');
 var PlayerStore = require('../stores/PlayerStore');
 
+var alternateMixin = require('../../utilities/alternateMixin');
+
 var GameMixin = {
-  getState: function () {
+  getInitialState: function () {
     return {
       environment: EnvironmentStore.get(),
       player: PlayerStore.get()
     };
-  },
-
-  getInitialState: function () {
-    return this.getState();
   },
 
   componentDidMount: function () {
@@ -25,8 +26,16 @@ var GameMixin = {
     PlayerStore.removeChangeListener(this.refreshState);
   },
 
-  refreshState: function () {
-    this.setState(this.getState());
+    refreshState: function () {
+      this.setState(updateState(this.state, {
+        environment: { $set: EnvironmentStore.get() },
+        player: { $set: PlayerStore.get() }
+      }));
+    },
+
+  // TODO: come up with better idea
+  _alternate: function (methods) {
+    return alternateMixin(GameMixin, methods);
   }
 };
 
