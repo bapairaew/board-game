@@ -5,6 +5,8 @@
 
 var React = require('react');
 var ReactRouter = require('react-router');
+var _ = require('underscore');
+
 var Routes = require('../routes.jsx');
 
 var Client = {
