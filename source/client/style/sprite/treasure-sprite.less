@@ -1,0 +1,19 @@
+.game-treasure {
+  .game-object(url(/assets/treasure-sprite.png));
+
+  .game-treasure-locate(@col; @row; @xoff: 0; @yoff: 0) {
+    .game-object-locate(@col, @row, @xoff + 9px + (@col * 25px), @yoff);
+  }
+
+  &.treasure-1 {
+    .game-treasure-locate(0, 0);
+  }
+
+  &.treasure-2 {
+    .game-treasure-locate(1, 0);
+  }
+
+  &.treasure-3 {
+    .game-treasure-locate(2, 0);
+  }
+}

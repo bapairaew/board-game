@@ -10,25 +10,16 @@ var joinClasses = require('../../utilities/joinClasses');
 
 var PlayerBadges = React.createClass({
   demoBadges: [
-    // TODO: badge sprite
-    'clarity',
-    'branch',
-    'ring',
-    'wand',
-    'band',
-    'basilius',
-    'force',
-    'crystalys',
-    'hood',
-    'dominator',
-    'demon'
+    'treasure-1',
+    'treasure-2',
+    'treasure-3'
   ],
 
   getBadgeElements: function (badges) {
     return badges.map(function (badge) {
       return (
         <div key={ badge } className="player-item">
-          <div className={ joinClasses(badge, 'game-item') }></div>
+          <div className={ joinClasses(badge, 'game-treasure') }></div>
         </div>
       )
     });
