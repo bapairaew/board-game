@@ -8,7 +8,6 @@ var _ = require('underscore');
 
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-var updateState = React.addons.update;
 
 var PlayerMixin = require('../mixins/PlayerMixin')._alternate(['getInitialState']);
 
@@ -34,9 +33,7 @@ var GameGeneralPanel = React.createClass({
   },
 
   changeTab: function (tab) {
-    this.setState(updateState(this.state, {
-      activeTab: { $set: tab }
-    }));
+    this.setState({ activeTab:  tab });
   },
 
   getTabContent: function (tab) {

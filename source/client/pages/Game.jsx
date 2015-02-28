@@ -7,7 +7,6 @@ var _ = require('underscore');
 var React = require('react/addons');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-var updateState = React.addons.update;
 
 var joinClasses = require('../../utilities/joinClasses');
 
@@ -53,17 +52,15 @@ var Game = React.createClass({
     // TODO: animation on hide panel.
     var stateToUpdate = {};
     if (!_.isString(menu)) {
-      stateToUpdate = {
-        showPanel: { $set: false }
-      };
+      stateToUpdate = { showPanel: false };
     } else {
       // Close if the click the same menu
       stateToUpdate = {
-        showPanel: { $set: this.state.activeMenu !== menu || !this.showPanel },
-        activeMenu: { $set: menu }
+        showPanel: this.state.activeMenu !== menu || !this.showPanel,
+        activeMenu: menu
       };
     }
-    this.setState(updateState(this.state, stateToUpdate));
+    this.setState(stateToUpdate);
   },
 
   stopPropagation: function (event) {

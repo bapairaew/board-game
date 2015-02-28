@@ -69,7 +69,7 @@ var Board = React.createClass({
   },
 
   handleMouseMove: function (e) {
-    console.log(e);
+    //console.log(e);
   },
 
   handleMouseUp: function (e) {

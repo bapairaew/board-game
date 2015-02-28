@@ -1,8 +1,5 @@
 'use strict';
 
-var React = require('react/addons');
-var updateState = React.addons.update;
-
 var PlayerStore = require('../stores/PlayerStore');
 
 var alternateMixin = require('../../utilities/alternateMixin');
@@ -23,9 +20,7 @@ var PlayerMixin = {
   },
 
   refreshState: function () {
-    this.setState(updateState(this.state, {
-      player: { $set: PlayerStore.get() }
-    }));
+    this.setState({ player: PlayerStore.get() });
   },
 
   // TODO: come up with better idea

@@ -1,8 +1,5 @@
 'use strict';
 
-var React = require('react/addons');
-var updateState = React.addons.update;
-
 var EnvironmentStore = require('../stores/EnvironmentStore');
 var PlayerStore = require('../stores/PlayerStore');
 
@@ -27,10 +24,10 @@ var GameMixin = {
   },
 
   refreshState: function () {
-    this.setState(updateState(this.state, {
-      environment: { $set: EnvironmentStore.get() },
-      player: { $set: PlayerStore.get() }
-    }));
+    this.setState({
+      environment: EnvironmentStore.get(),
+      player: PlayerStore.get()
+    });
   },
 
   // TODO: come up with better idea
