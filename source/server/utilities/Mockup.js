@@ -87,8 +87,10 @@ var Mockup = {
   map: function () {
     var map = new Map();
     map.id = chance.guid();
-    chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
-      .forEach(function () { map.places.push(Mockup.cell()); });
+    map.width = 4000;
+    map.height = 4000;
+    chance.n(chance.integer, chance.integer({ min: 500, max: 1000 }))
+      .forEach(function () { map.places.push(Mockup.cell(map.width, map.height)); });
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
       .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
     return map;
@@ -140,10 +142,10 @@ var Mockup = {
     }
     return weapon;
   },
-  cell: function () {
+  cell: function (width, height) {
     var cell = chance.weighted([Mockup.emptyCell, Mockup.church, Mockup.portal, Mockup.town, Mockup.treasure],
     [90, 2.5, 2.5, 2.5, 2.5])();
-    cell.position = new Position(chance.integer({ min: 0, max: 100 }), chance.integer({ min: 0, max: 100 }));
+    cell.position = new Position(chance.integer({ min: 0, max: width || 100 }), chance.integer({ min: 0, max: height || 100 }));
     return cell;
   },
   emptyCell: function () {

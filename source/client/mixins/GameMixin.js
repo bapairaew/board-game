@@ -26,12 +26,12 @@ var GameMixin = {
     PlayerStore.removeChangeListener(this.refreshState);
   },
 
-    refreshState: function () {
-      this.setState(updateState(this.state, {
-        environment: { $set: EnvironmentStore.get() },
-        player: { $set: PlayerStore.get() }
-      }));
-    },
+  refreshState: function () {
+    this.setState(updateState(this.state, {
+      environment: { $set: EnvironmentStore.get() },
+      player: { $set: PlayerStore.get() }
+    }));
+  },
 
   // TODO: come up with better idea
   _alternate: function (methods) {

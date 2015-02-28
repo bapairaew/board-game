@@ -3,13 +3,18 @@
 */
 'use strict';
 
+var _ = require('underscore');
 var React = require('React');
 var ReactART = require('react-art');
 var Surface = ReactART.Surface;
 var Group = ReactART.Group;
 var Shape = ReactART.Shape;
 
+var GameMixin = require('../mixins/GameMixin')._alternate(['getInitialState']);
+
 var Board = React.createClass({
+  mixins: [GameMixin],
+
   setWindowSize: function () {
     this.setState(this.getWindowSize());
   },
@@ -22,7 +27,7 @@ var Board = React.createClass({
   },
 
   getInitialState: function () {
-    return this.getWindowSize();
+    return _.extend(this.getWindowSize(), GameMixin._getInitialState());
   },
 
   componentDidMount: function () {
@@ -33,19 +38,47 @@ var Board = React.createClass({
     window.removeEventListener('resize', this.setWindowSize);
   },
 
-  render: function() {
-    return (
-      <Surface
-        width={ this.state.width }
-        height={ this.state.height }>
-        <Group x={ 210 } y={ 135 }>
-          <Shape fill="#7BC7BA" d={BORDER_PATH} />
+  // TODO: get map info from props??
+  getMap: function () {
+    return this.state.environment.maps[0] || null;
+  },
+
+  renderMap: function (map) {
+    // TODO: map client
+
+    if (!map) {
+      return null;
+    }
+
+    return map.places.map(function (cell) {
+      return (
+        <Group x={ cell.position.x } y={ cell.position.y }>
+          <Shape fill="#7BC7BA" d={DOT} />
         </Group>
-      </Surface>
+      );
+    });
+  },
+
+  render: function() {
+    // TODO: get map info from props??
+    var map = this.getMap();
+    var id = map && map.id;
+
+    return (
+      <div>
+        <div style={{ 'position': 'absolute' }}>{ id }</div>
+        <Surface
+          width={ this.state.width }
+          height={ this.state.height }>
+          <Group x={ 210 } y={ 135 }>
+            { this.renderMap(map) }
+          </Group>
+        </Surface>
+      </div>
     );
   },
 });
 
-var BORDER_PATH = "M3.00191459,4 C1.34400294,4 0,5.34785514 0,7.00550479 L0,220.994495 C0,222.65439 1.34239483,224 3.00191459,224 L276.998085,224 C278.655997,224 280,222.652145 280,220.994495 L280,7.00550479 C280,5.34561033 278.657605,4 276.998085,4 L3.00191459,4 Z M3.00191459,4";
+var DOT = "M12.5,17 C16.0898511,17 19,14.0898511 19,10.5 C19,6.91014895 16.0898511,4 12.5,4 C8.91014895,4 6,6.91014895 6,10.5 C6,14.0898511 8.91014895,17 12.5,17 Z M12.5,17";
 
 module.exports = Board;
