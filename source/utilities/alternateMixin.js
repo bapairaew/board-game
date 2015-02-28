@@ -2,6 +2,8 @@
 
 var _ = require('underscore');
 
+// TODO: Try using Object.create to replace _alternate
+// NOTE: mixins: [Object.create(<MIXIN>)] did not work as the component was not updated
 function alternateMixin(mixin, methods) {
   var _mixin = _.extend({}, mixin);
   (methods || []).forEach(function (method) {
