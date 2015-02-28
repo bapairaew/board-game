@@ -7,7 +7,7 @@ var _ = require('underscore');
 var React = require('react/addons');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-var updateState = React.addons.update
+var updateState = React.addons.update;
 
 var joinClasses = require('../../utilities/joinClasses');
 

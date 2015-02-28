@@ -27,7 +27,12 @@ var Board = React.createClass({
   },
 
   getInitialState: function () {
-    return _.extend(this.getWindowSize(), GameMixin._getInitialState());
+    return _.extend({
+        camera: { x: 0, y: 0 },
+        dragging: false
+      },
+      this.getWindowSize(),
+      GameMixin._getInitialState());
   },
 
   componentDidMount: function () {
@@ -52,11 +57,23 @@ var Board = React.createClass({
 
     return map.places.map(function (cell) {
       return (
-        <Group x={ cell.position.x } y={ cell.position.y }>
+        <Group key={ cell.id } x={ cell.position.x } y={ cell.position.y }>
           <Shape fill="#7BC7BA" d={DOT} />
         </Group>
       );
     });
+  },
+
+  handleMouseDown: function (e) {
+    console.log(e);
+  },
+
+  handleMouseMove: function (e) {
+    console.log(e);
+  },
+
+  handleMouseUp: function (e) {
+    console.log(e);
   },
 
   render: function() {
@@ -65,12 +82,17 @@ var Board = React.createClass({
     var id = map && map.id;
 
     return (
-      <div>
+      <div
+        onMouseDown={ this.handleMouseDown }
+        onMouseMove={ this.handleMouseMove }
+        onMouseUp={ this.handleMouseUp }>
         <div style={{ 'position': 'absolute' }}>{ id }</div>
         <Surface
           width={ this.state.width }
           height={ this.state.height }>
-          <Group x={ 210 } y={ 135 }>
+          <Group
+            x={ this.state.camera.x }
+            y={ this.state.camera.y }>
             { this.renderMap(map) }
           </Group>
         </Surface>
