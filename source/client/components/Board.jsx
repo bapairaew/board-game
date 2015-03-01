@@ -51,7 +51,7 @@ var Board = React.createClass({
   drag: { x: 0, y: 0 },
 
   isInsideScreen: function (x, y) {
-    return within(x, 0, this.state.width - OUTSIDE_THRESHOLD) && within(y, 0, this.state.height - OUTSIDE_THRESHOLD);
+    return within(x, 0, this.state.width - OUTSIDE_THRESHOLD) && within(y, OUTSIDE_THRESHOLD, this.state.height - OUTSIDE_THRESHOLD);
   },
 
   isInsideMap: function (x, y) {
