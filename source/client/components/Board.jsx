@@ -9,6 +9,7 @@ var ReactART = require('react-art');
 var Surface = ReactART.Surface;
 var Group = ReactART.Group;
 var Shape = ReactART.Shape;
+var Path = ReactART.Path;
 
 var GameMixin = require('../mixins/GameMixin')._alternate(['getInitialState']);
 
@@ -63,13 +64,11 @@ var Board = React.createClass({
   // Restric x, y to be inside map
   insideMap: function (x, y) {
     var map = this.getMap();
-    var tmp = {
+
+    return {
       x: restrictSize(x, -1 * (map.width - this.state.width), 0),
       y: restrictSize(y, -1 * (map.height - this.state.height), 0)
     };
-
-    console.log(tmp, x, y);
-    return tmp;
   },
 
   handleMouseDown: function (e) {
@@ -94,14 +93,7 @@ var Board = React.createClass({
     this.setState({ dragging: false });
   },
 
-  renderMapElements: function () {
-    // TODO: map client
-    var map = this.getMap();
-
-    if (!map) {
-      return null;
-    }
-
+  renderMapPlaces: function (map) {
     return map.places.map(function (cell) {
       // TODO: make it another components and use map client to choose which component to be render
       return (
@@ -112,12 +104,33 @@ var Board = React.createClass({
     });
   },
 
+  renderMapPaths: function (map) {
+    // TODO:
+    map.paths.forEach(function (_path) {
+      // TODO: make it another components and use map client to choose which component to be render
+      var path = new Path();
+      var exit1Position = _path.exit1.position;
+      var exit2Position = _path.exit2.position;
+      path.moveTo(exit1Position.x, exit1Position.y);
+      path.lineTo(exit2Position.x, exit2Position.y);
+    });
+  },
+
   renderCameraView: function () {
+    // TODO: map client
+    var map = this.getMap();
+
+    if (!map) {
+      return null;
+    }
+
+    this.renderMapPaths(map);
+
     return (
       <Group
         x={ this.state.camera.x }
         y={ this.state.camera.y }>
-        { this.renderMapElements() }
+        { this.renderMapPlaces(map) }
       </Group>
     );
   },
@@ -126,6 +139,8 @@ var Board = React.createClass({
     var surfaceStyle = {
       'cursor': this.state.dragging ? 'move': 'default'
     };
+
+    console.log(this.getMap());
 
     // TODO: Remove div
     return (
