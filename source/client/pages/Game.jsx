@@ -143,7 +143,7 @@ var Game = React.createClass({
           </div>
         </div>
         { panel }
-        <Board />
+        <Board map={ this.state.environment.maps[0] } />
       </div>
     )
   }

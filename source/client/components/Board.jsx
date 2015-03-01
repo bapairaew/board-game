@@ -13,12 +13,17 @@ var Shape = ReactART.Shape;
 var GameMixin = require('../mixins/GameMixin')._alternate(['getInitialState']);
 
 var within = require('../../utilities/within');
+var restrictSize = require('../../utilities/restrictSize');
 
 var DOT = "M12.5,17 C16.0898511,17 19,14.0898511 19,10.5 C19,6.91014895 16.0898511,4 12.5,4 C8.91014895,4 6,6.91014895 6,10.5 C6,14.0898511 8.91014895,17 12.5,17 Z M12.5,17";
 var OUTSIDE_THRESHOLD = 5;
 
 var Board = React.createClass({
   mixins: [GameMixin],
+
+  getMap: function () {
+    return this.state.environment.maps[0] || null;
+  },
 
   setWindowSize: function () {
     this.setState(this.getWindowSize());
@@ -51,12 +56,20 @@ var Board = React.createClass({
   drag: { x: 0, y: 0 },
 
   isInsideScreen: function (x, y) {
-    return within(x, 0, this.state.width - OUTSIDE_THRESHOLD) && within(y, OUTSIDE_THRESHOLD, this.state.height - OUTSIDE_THRESHOLD);
+    return within(x, 0, this.state.width - OUTSIDE_THRESHOLD) &&
+      within(y, OUTSIDE_THRESHOLD, this.state.height - OUTSIDE_THRESHOLD);
   },
 
-  isInsideMap: function (x, y) {
-    // TODO: avoid draggin outside the map
-    return true;
+  // Restric x, y to be inside map
+  insideMap: function (x, y) {
+    var map = this.getMap();
+    var tmp = {
+      x: restrictSize(x, -1 * (map.width - this.state.width), 0),
+      y: restrictSize(y, -1 * (map.height - this.state.height), 0)
+    };
+
+    console.log(tmp, x, y);
+    return tmp;
   },
 
   handleMouseDown: function (e) {
@@ -69,13 +82,8 @@ var Board = React.createClass({
     if (this.state.dragging) {
       var x = e.clientX;
       var y = e.clientY;
-      if (this.isInsideScreen(x, y) && this.isInsideMap(x, y)) {
-        this.setState({
-          camera: {
-            x: x - this.drag.x,
-            y: y - this.drag.y
-          }
-        });
+      if (this.isInsideScreen(x, y)) {
+        this.setState({ camera: this.insideMap(x - this.drag.x, y - this.drag.y) });
       } else {
         this.setState({ dragging: false });
       }
@@ -86,8 +94,9 @@ var Board = React.createClass({
     this.setState({ dragging: false });
   },
 
-  renderMapElements: function (map) {
+  renderMapElements: function () {
     // TODO: map client
+    var map = this.getMap();
 
     if (!map) {
       return null;
@@ -103,13 +112,20 @@ var Board = React.createClass({
     });
   },
 
+  renderCameraView: function () {
+    return (
+      <Group
+        x={ this.state.camera.x }
+        y={ this.state.camera.y }>
+        { this.renderMapElements() }
+      </Group>
+    );
+  },
+
   render: function() {
     var surfaceStyle = {
       'cursor': this.state.dragging ? 'move': 'default'
     };
-
-    // TODO: get map info from props??
-    var map = this.state.environment.maps[0] || null;
 
     // TODO: Remove div
     return (
@@ -121,11 +137,7 @@ var Board = React.createClass({
         <Surface
           width={ this.state.width }
           height={ this.state.height }>
-            <Group
-              x={ this.state.camera.x }
-              y={ this.state.camera.y }>
-              { this.renderMapElements(map) }
-            </Group>
+          { this.renderCameraView() }
         </Surface>
       </div>
     );
