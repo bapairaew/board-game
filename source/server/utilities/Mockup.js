@@ -89,7 +89,7 @@ var Mockup = {
     map.id = chance.guid();
     map.width = 4000;
     map.height = 4000;
-    chance.n(chance.integer, chance.integer({ min: 500, max: 1000 }))
+    chance.n(chance.integer, chance.integer({ min: 200, max: 500 }))
       .forEach(function () { map.places.push(Mockup.cell(map.width, map.height)); });
     chance.n(chance.integer, chance.integer({ min: 100, max: 200 }))
       .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
