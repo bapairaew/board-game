@@ -16,7 +16,8 @@ var within = require('../../utilities/within');
 var restrictSize = require('../../utilities/restrictSize');
 var stringFormat = require('../../utilities/stringFormat');
 
-var DOT = 'm 30.032962,0.40196916 a 0.70006999,0.70006999 0 0 0 -0.125,0.03125 0.70006999,0.70006999 0 0 0 -0.21875,0.09375 L 1.1579623,17.151969 a 0.70006999,0.70006999 0 0 0 0,1.21875 l 28.6562497,16.9375 a 0.70006999,0.70006999 0 0 0 0.71875,0 l 28.65625,-16.78125 a 0.70006999,0.70006999 0 0 0 0,-1.21875 L 30.376712,0.52696916 a 0.70006999,0.70006999 0 0 0 -0.34375,-0.125 z m 0,1.53125004 27.4375,15.9999998 -27.28125,15.96875 L 2.9079623,17.776969 30.032962,1.9332192 z';
+// height: 70 width: 60
+var SQUARE = 'm 30 30 l 30 20 l -30 20 l -30 -20 z';
 var OUTSIDE_THRESHOLD = 5;
 
 var Board = React.createClass({
@@ -98,7 +99,7 @@ var Board = React.createClass({
       // TODO: make it another components and use map client to choose which component to be render
       return (
         <Group key={ cell.id } x={ cell.position.x } y={ cell.position.y }>
-          <Shape fill="#f93" d={ DOT } />
+          <Shape stroke={ '#f93' } strokeWidth={ 3 } d={ SQUARE } />
         </Group>
       );
     });
@@ -115,7 +116,7 @@ var Board = React.createClass({
         exit2Position.x - exit1Position.x, exit2Position.y - exit1Position.y);
       return (
         <Group key={ _path.exit1.id + _path.exit2.id } x={ 0 } y={ 0 }>
-          <Shape stroke="#f93" d={ d } />
+          <Shape stroke={ '#f93' } d={ d } />
         </Group>
       );
     });
