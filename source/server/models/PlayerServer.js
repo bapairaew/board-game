@@ -35,12 +35,12 @@ PlayerServer.prototype.roll = function () {
   }
 };
 
-PlayerServer.prototype.walk = function (cell, environment) {
+PlayerServer.prototype.walk = function (place, environment) {
   if (validateWalk()) {
     this.token = null;
-    this.cell = environment.getCell(cell);
-    this.cell.execute(this);
-    return this.cell;
+    this.place = environment.getPlace(place);
+    this.place.execute(this);
+    return this.place;
   } else {
     throw 'Invalid walk path!';
   }

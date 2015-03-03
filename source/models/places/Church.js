@@ -1,13 +1,13 @@
 'use strict';
 
-var Cell = require('./Cell');
+var Place = require('./Place');
 
 function Church() {
-  Cell.call(this);
+  Place.call(this);
   this.type = 'Church';
 }
 
 // Inheritance
-Church.prototype = Object.create(Cell.prototype);
+Church.prototype = Object.create(Place.prototype);
 
 module.exports = Church;

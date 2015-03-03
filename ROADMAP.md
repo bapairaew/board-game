@@ -1,6 +1,6 @@
 ## Roadmap
 - Players walk and path validation
-- Items, Cells and Effects execution logic
+- Items, Places and Effects execution logic
 - Battle logic
 - Database integration
 - User Interface

@@ -1,21 +1,21 @@
 'use strict';
 
-var Cell = require('./Cell');
+var Place = require('./Place');
 
 function Town() {
-  Cell.call(this);
+  Place.call(this);
   this.type = 'Town';
 }
 
 // Inheritance
-Town.prototype = Object.create(Cell.prototype);
+Town.prototype = Object.create(Place.prototype);
 
 Town.prototype.type = 'Town';
 
 Town.prototype.income = null;
 
 Town.prototype.update = function (town) {
-  Cell.prototype.update.call(this, town);
+  Place.prototype.update.call(this, town);
   this.income = town.income;
 };
 
