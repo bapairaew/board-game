@@ -9,12 +9,12 @@ var _ = require('underscore');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-var PlayerMixin = require('../mixins/PlayerMixin')._alternate(['getInitialState']);
+var PlayerMixin = require('../../mixins/PlayerMixin')._alternate(['getInitialState']);
 
-var PlayerItems = require('./PlayerItems.jsx');
-var PlayerBadges = require('./PlayerBadges.jsx');
-var PlayerFriends = require('./PlayerFriends.jsx');
-var PlayerSettings = require('./PlayerSettings.jsx');
+var PlayerItems = require('../player/PlayerItems.jsx');
+var PlayerBadges = require('../player/PlayerBadges.jsx');
+var PlayerFriends = require('../player/PlayerFriends.jsx');
+var PlayerSettings = require('../player/PlayerSettings.jsx');
 
 var Tabs = {
   ITEMS: 'ITEMS',

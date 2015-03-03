@@ -8,11 +8,11 @@ var React = require('react');
 // TO BE REMOVED
 var Chance = require('Chance');
 var chance = new Chance();
-var BattleLog = require('../../models/logs/BattleLog');
-var BattleLogType = require('../../constants/BattleLogType');
+var BattleLog = require('../../../models/logs/BattleLog');
+var BattleLogType = require('../../../constants/BattleLogType');
 
-var joinClasses = require('../../utilities/joinClasses');
-var getLogElements = require('../../utilities/getLogElements.jsx');
+var joinClasses = require('../../../utilities/joinClasses');
+var getLogElements = require('../../../utilities/getLogElements.jsx');
 
 var GameBattlePanel = React.createClass({
   render: function () {

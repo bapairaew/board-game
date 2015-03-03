@@ -19,10 +19,10 @@ var PlayerAction = require('../actions/PlayerAction');
 var RollAction = require('../actions/RollAction');
 var WalkAction = require('../actions/WalkAction');
 
-var Board = typeof window === 'undefined' ? require('../components/Empty.jsx') : require('../components/Board.jsx');
-var GameBattlePanel = require('../components/GameBattlePanel.jsx');
-var GameFinancePanel = require('../components/GameFinancePanel.jsx');
-var GameGeneralPanel = require('../components/GameGeneralPanel.jsx');
+var Board = typeof window === 'undefined' ? require('../components/Empty.jsx') : require('../components/board/Board.jsx');
+var GameBattlePanel = require('../components/panels/GameBattlePanel.jsx');
+var GameFinancePanel = require('../components/panels/GameFinancePanel.jsx');
+var GameGeneralPanel = require('../components/panels/GameGeneralPanel.jsx');
 
 var Menus = {
   HP: 'HP',

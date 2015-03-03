@@ -6,7 +6,7 @@
 var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
-var joinClasses = require('../../utilities/joinClasses');
+var joinClasses = require('../../../utilities/joinClasses');
 
 var PlayerItems = React.createClass({
   demoItems: [

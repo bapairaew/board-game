@@ -9,11 +9,11 @@ var classSet = React.addons.classSet;
 // TO BE REMOVED
 var Chance = require('Chance');
 var chance = new Chance();
-var FinancialLog = require('../../models/logs/FinancialLog');
-var FinancialLogType = require('../../constants/FinancialLogType');
+var FinancialLog = require('../../../models/logs/FinancialLog');
+var FinancialLogType = require('../../../constants/FinancialLogType');
 
-var joinClasses = require('../../utilities/joinClasses');
-var getLogElements = require('../../utilities/getLogElements.jsx');
+var joinClasses = require('../../../utilities/joinClasses');
+var getLogElements = require('../../../utilities/getLogElements.jsx');
 
 var GameFinancePanel = React.createClass({
   render: function () {
