@@ -20,6 +20,13 @@ var stringFormat = require('../../utilities/stringFormat');
 var SQUARE = 'm 30 30 l 30 20 l -30 20 l -30 -20 z';
 var OUTSIDE_THRESHOLD = 5;
 
+var Direction = {
+  TOP_LEFT: 'TOP_LEFT',
+  TOP_RIGHT: 'TOP_RIGHT',
+  BOTTOM_RIGHT: 'BOTTOM_RIGHT',
+  BOTTOM_LEFT: 'BOTTOM_LEFT'
+};
+
 var Board = React.createClass({
   mixins: [GameMixin],
 
@@ -105,6 +112,98 @@ var Board = React.createClass({
     });
   },
 
+  getDirection: function (position1, position2) {
+    var vertical = position1.y < position2.y ? 'BOTTOM' : 'TOP';
+    var horizontal = position1.x < position2.x ? 'RIGHT' : 'LEFT';
+    return Direction[stringFormat('{0}_{1}', vertical, horizontal)];
+  },
+
+  // TOP->LEFT->BOTTOM->RIGHT
+  sortDirection: function (position1, position2) {
+    return [position1, position2].sort(function (a, b) {
+      var ySort = a.y - b.y;
+      return ySort === 0 ? a.x - b.x : ySort;
+    });
+  },
+
+  renderPath1: function (position1, position2, direction) {
+    var start = _.extend({}, position1);
+    var end = {
+      x: position2.x - start.x,
+      y: position2.y - start.y
+    };
+
+    switch (direction) {
+      case Direction.TOP_LEFT:
+      case Direction.TOP_RIGHT:
+        console.debug('this should be unused', direction);
+        break;
+      case Direction.BOTTOM_RIGHT:
+        start.x += 60;
+        start.y += 50;
+        end.x -= 30;
+        end.y -= 20;
+        break;
+      case Direction.BOTTOM_LEFT:
+        start.x += 30;
+        start.y += 70;
+        end.x += 30;
+        end.y -= 20;
+        break;
+    }
+
+    return this.renderPath(stringFormat('m {0} {1} l {2} {3}', start.x, start.y, end.x, end.y));
+  },
+
+  renderPath2: function (position1, position2, direction) {
+    var start = _.extend({}, position1);
+    var end = {
+      x: position2.x - start.x,
+      y: position2.y - start.y
+    };
+
+    switch (direction) {
+      case Direction.TOP_LEFT:
+      case Direction.TOP_RIGHT:
+        console.debug('this should be unused', direction);
+        break;
+      case Direction.BOTTOM_RIGHT:
+        start.x += 30;
+        start.y += 70;
+        end.x -= 30;
+        end.y -= 20;
+        break;
+      case Direction.BOTTOM_LEFT:
+        start.y += 50;
+        end.x += 30;
+        end.y -= 20;
+        break;
+    }
+
+    return this.renderPath(stringFormat('m {0} {1} l {2} {3}', start.x, start.y, end.x, end.y));
+  },
+
+  renderPath: function (d) {
+    return (
+      <Shape stroke={ '#f93' } strokeWidth={ 2 } d={ d } />
+    );
+  },
+
+  renderPathGroup: function (key, position1, position2) {
+    var sorted = this.sortDirection(position1, position2);
+    position1 = sorted[0];
+    position2 = sorted[1];
+
+    var direction = this.getDirection(position1, position2);
+
+    return (
+      <Group key={ key }>
+        { this.renderPath1(position1, position2, direction) }
+        { this.renderPath2(position1, position2, direction) }
+      </Group>
+    );
+  },
+
   renderMapPaths: function (map) {
     // TODO:
     return map.paths.map(function (_path) {
@@ -112,14 +211,8 @@ var Board = React.createClass({
       var exit2Position = _path.exit2.position;
 
       // TODO: make it another components and use map client to choose which component to be render
-      var d = stringFormat('m {0} {1} l {2} {3}', exit1Position.x, exit1Position.y,
-        exit2Position.x - exit1Position.x, exit2Position.y - exit1Position.y);
-      return (
-        <Group key={ _path.exit1.id + _path.exit2.id } x={ 0 } y={ 0 }>
-          <Shape stroke={ '#f93' } d={ d } />
-        </Group>
-      );
-    });
+      return this.renderPathGroup(_path.exit1.id + _path.exit2.id, exit1Position, exit2Position);
+    }.bind(this));
   },
 
   renderCameraView: function () {
