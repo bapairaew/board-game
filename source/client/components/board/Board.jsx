@@ -103,12 +103,10 @@ var Board = React.createClass({
   },
 
   renderMapPaths: function (map) {
-    // TODO:
     return map.paths.map(function (_path) {
       var exit1Position = _path.exit1.position;
       var exit2Position = _path.exit2.position;
 
-      // TODO: make it another components and use map client to choose which component to be render
       return (
         <Path key={ _path.exit1.id + _path.exit2.id } position1={ exit1Position } position2={ exit2Position } />
       );
