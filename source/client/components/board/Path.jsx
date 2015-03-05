@@ -43,7 +43,7 @@ var Path = React.createClass({
     switch (direction) {
       case Direction.TOP_LEFT:
       case Direction.TOP_RIGHT:
-        console.debug('this should be unused', direction);
+        console.debug('this should be unused', position1, position2, direction);
         break;
       case Direction.BOTTOM_RIGHT:
         start.x += 60;

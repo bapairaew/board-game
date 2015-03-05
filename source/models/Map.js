@@ -2,7 +2,7 @@
 
 var Entity = require('./Entity');
 var Path = require('./Path');
-var Place = require('./places/Place');
+var PlaceParser = require('./places/PlaceParser');
 
 var mapEntity = require('../utilities/mapEntity');
 
@@ -28,7 +28,7 @@ Map.prototype.height = null;
 
 Map.prototype.update = function (map) {
   Entity.prototype.update.call(this, map);
-  this.places = mapEntity(map.places, Place);
+  this.places = PlaceParser.parseMany(map.places);
   this.paths = mapEntity(map.paths, Path);
   this.skin = map.skin;
   this.width = map.width;
