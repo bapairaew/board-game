@@ -8,7 +8,6 @@ var React = require('React');
 var ReactART = require('react-art');
 var Surface = ReactART.Surface;
 var Group = ReactART.Group;
-var Shape = ReactART.Shape;
 
 var Place = require('./Place.jsx');
 var Path = require('./Path.jsx');
