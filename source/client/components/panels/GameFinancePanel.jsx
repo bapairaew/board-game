@@ -5,15 +5,15 @@
 
 var React = require('react/addons');
 var classSet = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
+
+var getLogElements = require('../../../utilities/getLogElements.jsx');
 
 // TO BE REMOVED
 var Chance = require('Chance');
 var chance = new Chance();
 var FinancialLog = require('../../../models/logs/FinancialLog');
 var FinancialLogType = require('../../../constants/FinancialLogType');
-
-var joinClasses = require('../../../utilities/joinClasses');
-var getLogElements = require('../../../utilities/getLogElements.jsx');
 
 var GameFinancePanel = React.createClass({
   render: function () {

@@ -5,8 +5,7 @@
 
 var React = require('react/addons');
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-var joinClasses = require('../../../utilities/joinClasses');
+var joinClasses = require('react/lib/joinClasses');
 
 var PlayerBadges = React.createClass({
   demoBadges: [

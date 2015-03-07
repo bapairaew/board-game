@@ -6,8 +6,7 @@
 var React = require('react/addons');
 var Navigation = require('react-router').Navigation;
 var classSet = React.addons.classSet;
-
-var joinClasses = require('../../utilities/joinClasses');
+var joinClasses = require('react/lib/joinClasses');
 
 var PlayerAction = require('../actions/PlayerAction');
 var PlayerStore = require('../stores/PlayerStore');

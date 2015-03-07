@@ -4,8 +4,7 @@
 'use strict';
 
 var React = require('react');
-
-var joinClasses = require('./joinClasses');
+var joinClasses = require('react/lib/joinClasses');
 
 // TODO: MOVE TO Log MODEL??
 function getLogElements(logs) {

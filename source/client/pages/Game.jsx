@@ -7,8 +7,7 @@ var _ = require('underscore');
 var React = require('react/addons');
 var classSet = React.addons.classSet;
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
-var joinClasses = require('../../utilities/joinClasses');
+var joinClasses = require('react/lib/joinClasses');
 
 var GameMixin = require('../mixins/GameMixin')._alternate(['getInitialState']);
 

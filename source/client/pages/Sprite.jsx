@@ -4,7 +4,7 @@
 'use strict';
 
 var React = require('react');
-var joinClasses = require('../../utilities/joinClasses');
+var joinClasses = require('react/lib/joinClasses');
 
 var Sprite = React.createClass({
   objects: [

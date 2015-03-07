@@ -5,10 +5,9 @@
 
 var React = require('react/addons');
 var classSet = React.addons.classSet;
+var joinClasses = require('react/lib/joinClasses');
 
 var GameMixin = require('../../mixins/GameMixin');
-
-var joinClasses = require('../../../utilities/joinClasses');
 
 var PlayerFriends = React.createClass({
   mixins: [GameMixin],
