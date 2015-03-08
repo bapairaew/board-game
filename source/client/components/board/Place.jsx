@@ -4,26 +4,36 @@
 'use strict';
 
 var React = require('React');
-var ReactART = require('react-art');
-var Group = ReactART.Group;
-var Shape = ReactART.Shape;
+var ReactPIXI = require('react-pixi');
+var Sprite = ReactPIXI.Sprite;
 
-// height: 70 width: 60
-var SQUARE = 'm 30 30 l 30 20 l -30 20 l -30 -20 z';
-var STROKES = {
-  Place: '#f93',
-  Portal: '#00f',
-  Treasure: '#f00',
-  Town: '#0f0',
-  Church: '#0ff'
+var getAsset = require('../../../utilities/getAsset');
+
+var ASSETS = {
+  Place: 'place',
+  Portal: 'portal',
+  Treasure: 'treasure',
+  Town: 'town',
+  Church: 'church'
 };
 
 var Place = React.createClass({
+  propTypes: {
+    place: React.PropTypes.object.isRequired
+  },
+
+  handleClick: function () {
+    window.alert(this.props.place.id);
+  },
+
   render: function () {
     return (
-      <Group x={ this.props.place.position.x } y={ this.props.place.position.y }>
-        <Shape stroke={ STROKES[this.props.place.type] } strokeWidth={ 3 } d={ SQUARE } />
-      </Group>
+      <Sprite
+        x={ this.props.place.position.x }
+        y={ this.props.place.position.y }
+        image={ getAsset(ASSETS[this.props.place.type]) }
+        interactive={ true }
+        click={ this.handleClick } />
     );
   }
 });

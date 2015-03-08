@@ -5,9 +5,9 @@
 
 var _ = require('underscore');
 var React = require('React');
-var ReactART = require('react-art');
-var Surface = ReactART.Surface;
-var Group = ReactART.Group;
+var ReactPIXI = require('react-pixi');
+var Stage = ReactPIXI.Stage;
+var DisplayObjectContainer = ReactPIXI.DisplayObjectContainer;
 
 var Place = require('./Place.jsx');
 var Path = require('./Path.jsx');
@@ -121,12 +121,12 @@ var Board = React.createClass({
     }
 
     return (
-      <Group
+      <DisplayObjectContainer
         x={ this.state.camera.x }
         y={ this.state.camera.y }>
-        { this.renderMapPlaces(map) }
         { this.renderMapPaths(map) }
-      </Group>
+        { this.renderMapPlaces(map) }
+      </DisplayObjectContainer>
     );
   },
 
@@ -142,11 +142,12 @@ var Board = React.createClass({
         onMouseDown={ this.handleMouseDown }
         onMouseMove={ this.handleMouseMove }
         onMouseUp={ this.handleMouseUp }>
-        <Surface
+        <Stage
           width={ this.state.width }
-          height={ this.state.height }>
+          height={ this.state.height }
+          backgroundcolor={ 0x6CDFEA }>
           { this.renderCameraView() }
-        </Surface>
+        </Stage>
       </div>
     );
   }
