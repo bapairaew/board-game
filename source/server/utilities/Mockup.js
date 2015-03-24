@@ -87,12 +87,17 @@ var Mockup = {
   map: function () {
     var map = new Map();
     map.id = chance.guid();
-    map.width = 4000;
-    map.height = 4000;
-    chance.n(chance.integer, chance.integer({ min: 200, max: 500 }))
-      .forEach(function () { map.places.push(Mockup.place(map.width, map.height)); });
-    chance.n(chance.integer, chance.integer({ min: 50, max: 100 }))
-      .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
+
+    var MAP_SIZE = 200;
+
+    map.width = MAP_SIZE;
+    map.height = MAP_SIZE;
+
+    map.places = Mockup.uniquePlaces(MAP_SIZE, MAP_SIZE, 10);
+
+    // chance.n(chance.integer, chance.integer({ min: 50, max: 100 }))
+    //   .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
+
     return map;
   },
   effect: function () {
@@ -184,6 +189,20 @@ var Mockup = {
       path.exit2 = chance.pick(places);
     } while(path.exit1.id === path.exit2.id || !isUniquePath(path, paths));
     return path;
+  },
+  uniquePlaces: function (x, y, prob) {
+    var places = [];
+    for (var i = 0; i < x; i++) {
+      for (var j = 0; j < y; j++) {
+        if (chance.integer({ min: 0, max: 100 }) < prob) {
+          var place = Mockup.place();
+          place.position = new Position(i, j);
+          places.push(place);
+        }
+      }
+    }
+
+    return places;
   },
   randomPlayer: function (environment) {
     return chance.pick(environment.players);

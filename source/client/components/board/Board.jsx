@@ -8,14 +8,18 @@ var React = require('React');
 var ReactPIXI = require('react-pixi');
 var Stage = ReactPIXI.Stage;
 var DisplayObjectContainer = ReactPIXI.DisplayObjectContainer;
+var TilingSprite = ReactPIXI.TilingSprite;
 
 var Place = require('./Place.jsx');
 var Path = require('./Path.jsx');
+
+var GameConstant = require('../../../constants/Game');
 
 var GameMixin = require('../../mixins/GameMixin')._alternate(['getInitialState']);
 
 var within = require('../../../utilities/within');
 var restrictSize = require('../../../utilities/restrictSize');
+var getAsset = require('../../../utilities/getAsset');
 
 var OUTSIDE_THRESHOLD = 5;
 
@@ -64,10 +68,12 @@ var Board = React.createClass({
   // Restric x, y to be inside map
   insideMap: function (x, y) {
     var map = this.getMap();
+    var mapActualWidth = map.width * GameConstant.BLOCK_SIZE;
+    var mapActualHeight = map.width * GameConstant.BLOCK_SIZE;
 
     return {
-      x: restrictSize(x, -1 * (map.width - this.state.width), 0),
-      y: restrictSize(y, -1 * (map.height - this.state.height), 0)
+      x: restrictSize(x, -1 * (mapActualWidth - this.state.width), 0),
+      y: restrictSize(y, -1 * (mapActualHeight - this.state.height), 0)
     };
   },
 
@@ -112,6 +118,15 @@ var Board = React.createClass({
     }.bind(this));
   },
 
+  renderMapBackground: function (map) {
+    return (
+      <TilingSprite
+        image={ getAsset('background') }
+        width={ map.width * GameConstant.BLOCK_SIZE }
+        height={ map.height * GameConstant.BLOCK_SIZE } />
+    );
+  },
+
   renderCameraView: function () {
     // TODO: map client
     var map = this.getMap();
@@ -120,11 +135,13 @@ var Board = React.createClass({
       return null;
     }
 
+    // { this.renderMapPaths(map) }
+
     return (
       <DisplayObjectContainer
         x={ this.state.camera.x }
         y={ this.state.camera.y }>
-        { this.renderMapPaths(map) }
+        { this.renderMapBackground(map) }
         { this.renderMapPlaces(map) }
       </DisplayObjectContainer>
     );
@@ -145,7 +162,8 @@ var Board = React.createClass({
         <Stage
           width={ this.state.width }
           height={ this.state.height }
-          backgroundcolor={ 0x6CDFEA }>
+          backgroundcolor={ 0xDDDDDD }
+          image={ getAsset('background') }>
           { this.renderCameraView() }
         </Stage>
       </div>

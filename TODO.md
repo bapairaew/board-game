@@ -1,9 +1,15 @@
-## Roadmap
+## TODO
+- Map Renderer
+- Refactor
+  - Move field value in models out of prototype
+  - Immutable models
+  - Use shouldComponenetUpdate in React class
+  - Minimize server - client interaction
+  - Flux in server side
 - Players walk and path validation
 - Items, Places and Effects execution logic
 - Battle logic
 - Database integration
-- User Interface
 - Login logic
 - Income scheduler
 - JIRA integration
