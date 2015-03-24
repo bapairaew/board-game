@@ -26,10 +26,6 @@ var OUTSIDE_THRESHOLD = 5;
 var Board = React.createClass({
   mixins: [GameMixin],
 
-  getMap: function () {
-    return this.state.environment.maps[0] || null;
-  },
-
   setWindowSize: function () {
     this.setState(this.getWindowSize());
   },
@@ -67,7 +63,7 @@ var Board = React.createClass({
 
   // Restric x, y to be inside map
   insideMap: function (x, y) {
-    var map = this.getMap();
+    var map = this.props.map;
     var mapActualWidth = map.width * GameConstant.BLOCK_SIZE;
     var mapActualHeight = map.width * GameConstant.BLOCK_SIZE;
 
@@ -129,22 +125,25 @@ var Board = React.createClass({
 
   renderCameraView: function () {
     // TODO: map client
-    var map = this.getMap();
+    var map = this.props.map;
 
     if (!map) {
       return null;
     }
-
-    // { this.renderMapPaths(map) }
 
     return (
       <DisplayObjectContainer
         x={ this.state.camera.x }
         y={ this.state.camera.y }>
         { this.renderMapBackground(map) }
+        { this.renderMapPaths(map) }
         { this.renderMapPlaces(map) }
       </DisplayObjectContainer>
     );
+  },
+
+  shouldComponentUpdate: function (nextProps, nextState) {
+    return this.props.map !== nextProps.map || this.state !== nextState;
   },
 
   render: function() {

@@ -88,15 +88,13 @@ var Mockup = {
     var map = new Map();
     map.id = chance.guid();
 
-    var MAP_SIZE = 200;
+    var MAP_SIZE = 50;
 
     map.width = MAP_SIZE;
     map.height = MAP_SIZE;
 
-    map.places = Mockup.uniquePlaces(MAP_SIZE, MAP_SIZE, 10);
-
-    // chance.n(chance.integer, chance.integer({ min: 50, max: 100 }))
-    //   .forEach(function () { map.paths.push(Mockup.uniquePath(map.places, map.paths)); });
+    map.places = Mockup.places(MAP_SIZE, MAP_SIZE, 60);
+    map.paths = Mockup.paths(map.places);
 
     return map;
   },
@@ -190,10 +188,47 @@ var Mockup = {
     } while(path.exit1.id === path.exit2.id || !isUniquePath(path, paths));
     return path;
   },
-  uniquePlaces: function (x, y, prob) {
+  paths: function (places) {
+    var paths = [];
+
+    for (var i = 0; i < places.length; i++) {
+      var place = places[i];
+
+      if (chance.bool()) {
+        // right
+        var x = place.position.x;
+        for (var j = i + 1; j < places.length; j++) {
+          var right = places[j];
+          if (right.position.x === x) {
+            var path = new Path();
+            path.exit1 = place;
+            path.exit2 = right;
+            paths.push(path);
+            break;
+          }
+        }
+      } else if (chance.weighted([true, false], [60, 40])) {
+        // bottom
+        var y = place.position.y;
+        for (var j = i + 1; j < places.length; j++) {
+          var bottom = places[j];
+          if (bottom.position.y === y) {
+            var path = new Path();
+            path.exit1 = place;
+            path.exit2 = bottom;
+            paths.push(path);
+            break;
+          }
+        }
+      }
+    }
+
+    return paths;
+  },
+  places: function (x, y, prob) {
     var places = [];
-    for (var i = 0; i < x; i++) {
-      for (var j = 0; j < y; j++) {
+    for (var i = 1; i < x; i += 2) {
+      for (var j = 1; j < y; j += 2) {
         if (chance.integer({ min: 0, max: 100 }) < prob) {
           var place = Mockup.place();
           place.position = new Position(i, j);

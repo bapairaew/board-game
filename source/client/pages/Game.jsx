@@ -49,13 +49,13 @@ var Game = React.createClass({
 
   togglePanel: function (menu) {
     // TODO: animation on hide panel.
-    var stateToUpdate = {};
+    var stateToUpdate;
     if (!_.isString(menu)) {
       stateToUpdate = { showPanel: false };
     } else {
       // Close if the click the same menu
       stateToUpdate = {
-        showPanel: this.state.activeMenu !== menu || !this.showPanel,
+        showPanel: this.state.activeMenu !== menu || !this.state.showPanel,
         activeMenu: menu
       };
     }

@@ -11,7 +11,7 @@ var TilingSprite = ReactPIXI.TilingSprite;
 var stringFormat = require('../../../utilities/stringFormat');
 var getAsset = require('../../../utilities/getAsset');
 
-var OFFSET = 0;
+var GameConstant = require('../../../constants/Game');
 
 var Path = React.createClass({
   propTypes: {
@@ -28,15 +28,15 @@ var Path = React.createClass({
   },
 
   render: function () {
-    var width = this.getDistance(this.props.position1, this.props.position2);
+    var width = this.getDistance(this.props.position1, this.props.position2) * GameConstant.BLOCK_SIZE;
     var rotation = this.getAngle(this.props.position1, this.props.position2);
 
     return (
       <TilingSprite
-        x={ this.props.position1.x + OFFSET }
-        y={ this.props.position1.y + OFFSET }
-        width={ width + OFFSET }
-        height={ 20 }
+        x={ (this.props.position1.x + 1) * GameConstant.BLOCK_SIZE }
+        y={ this.props.position1.y * GameConstant.BLOCK_SIZE }
+        width={ width }
+        height={ GameConstant.BLOCK_SIZE }
         rotation={ rotation }
         image={ getAsset('path') } />
     );
